@@ -1,12 +1,12 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './Routes';
 
 const AppContainer = () => (
-  <MemoryRouter>
+  <BrowserRouter>
     <Routes />
-  </MemoryRouter>
+  </BrowserRouter>
 );
 
 export default AppContainer;

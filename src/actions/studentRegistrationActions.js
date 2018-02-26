@@ -9,6 +9,16 @@ export const createStudentData = student => ({
   student
 });
 
+export const setAdminAccess = () => ({
+  type: 'SET_ADMIN_ACCESS',
+});
+
+export const setStudentCredentials = (id, secretKey) => ({
+  type: 'SET_STUDENT_CREDENTIALS',
+  id,
+  secretKey,
+});
+
 export const createStudentSuccessAction = newStudent => ({
   type: 'CREATE_STUDENT_SUCCESS_ACTION',
   newStudent,

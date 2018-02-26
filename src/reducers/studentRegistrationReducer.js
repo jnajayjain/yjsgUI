@@ -4,7 +4,11 @@ const initialState = {
   isFetched: false,
   isUpdated: false,
   isCreated: false,
+  isAdmin: false,
+  id: '',
+  secretKey: '',
   updateMessage: '',
+  updatedStudent: {}
 };
 
 const studentRegistrationReducer = (state = initialState, action) => {
@@ -16,6 +20,11 @@ const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: true,
         isCreated: false,
       };
+    case 'SET_ADMIN_ACCESS':
+      return {
+        ...state,
+        isAdmin: true,
+      };
 
     case 'FETCH_STUDENT':
       return {
@@ -23,6 +32,13 @@ const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: true,
         isFetched: false,
         isUpdated: false,
+      };
+
+    case 'SET_STUDENT_CREDENTIALS':
+      return {
+        ...state,
+        id: action.id,
+        secretKey: action.secretKey,
       };
 
     case 'UPDATE_STUDENT':
@@ -43,9 +59,10 @@ const studentRegistrationReducer = (state = initialState, action) => {
     case 'UPDATE_STUDENT_SUCCESS_ACTION':
       return {
         ...state,
-        student: {...state.student, ...action.student},
+        updatedStudent: {...state.student, ...action.student},
         isLoading: false,
         isUpdated: true,
+        isAdmin: false,
       };
 
     case 'FETCH_STUDENT_SUCCESS_ACTION':
@@ -61,6 +78,7 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isCreated: false,
+        isAdmin: false,
       };
 
     case 'UPDATE_STUDENT_FAILED_ACTION':
@@ -68,6 +86,7 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isUpdated: false,
+        isAdmin: false,
       };
 
     case 'FETCH_STUDENT_FAILED_ACTION':
@@ -75,6 +94,7 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isFetched: false,
+        isAdmin: false,
       };
 
     default: {
@@ -100,3 +120,9 @@ export const isCreated = state => state.studentRegistrationReducer.isCreated;
 export const isFetched = state => state.studentRegistrationReducer.isFetched;
 
 export const updateMessage = state => state.studentRegistrationReducer.student.message;
+
+export const isAdmin = state => state.studentRegistrationReducer.isAdmin;
+
+export const getUserIdByParams = state => state.studentRegistrationReducer.id;
+
+export const getUserSecretKeyByParams = state => state.studentRegistrationReducer.secretKey;

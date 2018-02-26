@@ -5,6 +5,13 @@ import cloneDeep from 'lodash/cloneDeep';
 import extend  from 'lodash/extend';
 import isEqual from 'lodash/isEqual';
 
+import {
+  studiesArray,
+  busStops,
+  gender,
+  yesOrNo,
+} from '../utils/yjsgConstants';
+import { adminKey } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
 import LinkButton from './commonComponents/LinkButton';
 import { updateStudentData } from '../actions/studentRegistrationActions';
@@ -15,7 +22,7 @@ import {
   validateInput,
 } from '../utils/registrationFormUtils';
 import {
-  getStudent,
+  getStudent, isAdmin,
   isFetched,
   isLoading,
   isUpdated,
@@ -23,192 +30,7 @@ import {
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import TextAreaField from './formComponents/TextAreaField';
-
-const studiesArray = [
-  {text:'Level 1  : णमोकार मंत्र, चार मंगल, तीर्थंकर-भगवान, देव दर्शन, जीव-अजीव, दिनचर्या, भावना गीत',
-    value: 'Level 1'
-  },
-  {text:'Level 2  : पाप, कषाय, सदाचार, गति, द्रव्य, देव स्तुति',
-    value: 'Level 2'
-  },
-  {text:'Level 3  : पंच परमेष्ठी, अष्ट मूलगुण, इन्द्रिय, भक्ष्य-अभक्ष्य, द्रव्य,गुण - पर्याय, , देव स्तुति',
-    value: 'Level 3'
-  },
-  {text:'Level 4  : आत्मा-परमात्मा, सात तत्त्व, षट्‍ आवशयक, कर्म, , देव स्तुति',
-    value: 'Level 4'
-  },
-  {text:'Level 5 : देव -शास्त्र - गुरू, सात तत्त्व की भूल, चार अनुयोग, सात व्यसन, १२ भावना',
-    value: 'Level 5'
-  },
-  {text:'Level 6  :  छहढाला - ढाल 1 & 2',
-    value: 'Level 6'
-  },
-  {text:'Level 7 : छहढाला - ढाल 3',
-    value: 'Level 7'
-  },
-  {text: 'Level 8 : छहढाला - ढाल 4',
-    value: 'Level 8'
-  }
-];
-const busStops = [
-  {text: 'बजरंग/नंदा नगर मेन रोड (मंदिर)',
-    value: 'Bajrang/Nanda Nagar Main Road(Mandir)'
-  },
-  {text: 'सुखलिया MR10 मंदिर गली',
-    value: 'Sukhliya MR10 Mandir gali'},
-  {text: 'क्लर्क कॉलोनी  ITI मेन रोड',
-    value: 'Clerk Colony ITI Main Road'
-  },
-  {text: 'गोयल नगर मंदिर',
-    value: 'Goyal Nagar Mandir'
-  },
-  {text: 'ब्रजेशवरी मंदिर IDA 140 JMB',
-    value: 'Brajeshwari Mandir IDA 140 JMB'
-  },
-  {text: 'मिलन हाईट्स',
-    value: 'Milan Heights'
-  },
-  {text: 'वैभव नगर (शर्मा  स्वीट्स)',
-    value: 'Vaibhav Nagar(Sharma Sweets)'
-  },
-  {text: 'सुख शांति/उदय नगर मंदिर',
-    value: 'Sukh Shanti/Uday Nagar Mandir'
-  },
-  {text: 'गोयल नगर बंगाली चौराहा',
-    value: 'Goyal Nagar Bengali Square'
-  },
-  {text: 'तिलक नगर मंदिर',
-    value: 'Tilak Nagar Mandir'
-  },
-  {text: 'कनाड़िया रोड /पत्रकार चौराहा',
-    value: 'Kanadiya Road/ Patrakar Square'
-  },
-  {text: 'पलासिया सर्किल',
-    value: 'Palasia Circle'
-  },
-  {text: 'गीता भवन',
-    value: 'Geeta Bhawan'
-  },
-  {text: 'तिलक नगर  मंदिर',
-    value: 'Tilak Nagar Mandir'
-  },
-  {text: 'जावरवाला मंदिर',
-    value: 'Jaavarwala Mandir'
-  },
-  {text: 'समवशरण मंदिर',
-    value: 'Samwasharan Mandir'
-  },
-  {text: 'विजय नगर-कृष्णा मिल्क सेंटर',
-    value: 'Vijay Nagar - Krishna Milk centre'
-  },
-  {text: 'तुलसी नगर मेन रोड (महालक्ष्मी मंदिर)',
-    value: 'Tulsi Nagar Main Road(Mahalaxmi Mandir)'
-  },
-  {text: 'सत्य साई चौराहा (पांच बालयति मदिर)',
-    value: 'Satya Sai Square(Paanch Baalyati Mandir)'
-  },
-  {text: '78 Scheme (मंदिर)',
-    value: '78 Scheme (Mandir)'
-  },
-  {text: 'कालानी मंदिर गली मेन रोड',
-    value: 'Kaalani Mandir Gali Main Road'
-  },
-  {text: 'साधना नगर मंदिर गली मेन रोड',
-    value: 'Saadhna Nagar Mandir Gali Main Road'
-  },
-  {text: 'गाँधी नगर मंदिर',
-    value: 'Gandhi Nagar Mandir'
-  },
-  {text: 'कालानी नगर मंदिर गली मेन रोड - 2',
-    value: 'Kaalani Nagar Mandir Gali Main Road - 2'
-  },
-  {text: 'अंजनी नगर (60 फुट रोड)',
-    value: 'Anjani Nagar(60 Foot Road)'
-  },
-  {text: 'पल्हर नगर बांगड़दा रोड (पानी की टंकी)',
-    value: 'Palhar Nagar Baangarda Road(Paani ki tanki)'
-  },
-  {text: 'रामचंद नगर सर्किल (एरोड्रम रोड)',
-    value: 'Raamchand Nagar Circle (Aerodrom Road)'
-  },
-  {text: 'छात्रपति नगर मेन रोड (महावीर बाग)',
-    value: 'Chhatrapati Nagar Main Road(Mahaveer Bagh)'
-  },
-  {text: 'जैन कोलोनी (अहिंसा  गेट)',
-    value: 'Jain Colony(Ahinsa Gate)'
-  },
-  {text: 'सपना संगीता टॉवर सर्किल',
-    value: 'Sapna Sangeeta Tower Circle'
-  },
-  {text: 'भॅवरकुआ बीसीएम',
-    value: 'Bhanwarkuwa BCM'
-  },
-  {text: 'राजमोहल्ला (OPP चैत्यालय)',
-    value: 'RajMohalla(Opp Chaityalaya)'
-  },
-  {text: 'कांच मंदिर मेन रोड (नरसिंह बाजार)',
-    value: 'Kaanch Mandir Main Road(Narsingh Bazar)'
-  },
-  {text: 'बड़ा गणपति',
-    value: 'Bada Ganpati'
-  },
-  {text: 'रामशाह मंदिर मेन रोड',
-    value: 'Ramshah Mandir Main Road'
-  },
-  {text: 'स्मृति नगर मंदिर गली (बांगड़दा रोड)',
-    value: 'Smrti Nagar Mandir Gali(Baangarda Road)'
-  },
-  {text: 'इंदौर तार फैक्टरी (संगम नगर)',
-    value: 'Indore Taar Factory(Sangam Nagar)'
-  },
-  {text: 'रामबाग चौराहा (कुसुम टाकीज़)',
-    value: 'Rambagh Square(Kusum Talkies)'
-  },
-  {text: 'चिकमंगलूर चौराहा',
-    value: 'Chikmanglur Square'
-  },
-  {text: 'जीएसआईटीएस सर्किल',
-    value: 'GSITS circle'
-  },
-  {text: 'महावीर गेट (सुदामा नगर )',
-    value: 'Mahavir Gate(Sudama Nagar)'
-  },
-  {text: 'रंजीत हनुमान (गुमाश्ता नगर)',
-    value: 'Ranjeet Hanuman(Gumashta Nagar)'
-  },
-  {text: 'राजेंद्र नगर D-MART चौराहा',
-    value: 'Rajendra Nagar D-MART Square'
-  },
-  {text: 'वैशाली  नगर गोपुर चौराहा',
-    value: 'Vaishali Nagar Gopur Square'
-  },
-  {text: 'परिवहन नगर (नितिन ट्रेडर्स गली)',
-    value: 'Parivahan Nagar(Nitin Traders Gali)'
-  },
-  {text: 'चोइथराम सर्किल ',
-    value: 'Choithram Circle'
-  }
-];
-const gender = [
-  {
-    text: 'पुरुष',
-    value: 'M'
-  },
-  {
-    text: 'महिला',
-    value: 'F'
-  }
-];
-const yesOrNo = [
-  {
-    text: 'हाँ',
-    value: 1
-  },
-  {
-    text: 'नहीं',
-    value: 0
-  }
-];
+import { getParameterByName } from '../utils/http';
 
 class StudentRegistrationCorrectionForm extends Component {
   constructor(props) {
@@ -276,17 +98,27 @@ class StudentRegistrationCorrectionForm extends Component {
     return isValidUserInfo(this.state.errorMessage);
   }
 
+  updateStudentData() {
+    const id = getParameterByName('id');
+    const secretCode = getParameterByName('secCode');
+    if (id && secretCode) {
+      this.props.updateStudentData(id, secretCode, this.state.student);
+    } else if (this.props.isAdmin) {
+      this.props.updateStudentData(this.props.studentData.id, adminKey, this.state.student);
+    } else {
+      this.props.updateStudentData(this.props.studentData['id'],
+        this.props.studentData['secretKey'],
+        this.state.student);
+    }
+  }
+
   submitStudentData() {
     this.checkError(this.state.student);
     if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
       this.setState({
         isSubmitTriggered: true,
       });
-
-      this.props.updateStudentData(this.props.studentData['id'],
-        this.props.studentData['secretKey'],
-        this.state.student);
-
+      this.updateStudentData();
     } else {
       this.setState({
         isFormChanged: false,
@@ -296,7 +128,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   renderClassAttended2017() {
-    if(this.state.student.classAttended2017) {
+    if(this.props.studentData.classAttended2017) {
       return (
         <InputField
           type={'text'}
@@ -530,7 +362,7 @@ class StudentRegistrationCorrectionForm extends Component {
               'कृपया पुनः प्रयास करे ।'}</h5>
               <LinkButton
                 buttonText={'वापस जाओ'}
-                linkPath={'/'}
+                linkPath={'/splashPrePopulated'}
               />
             </div>
           </div>
@@ -546,6 +378,7 @@ StudentRegistrationCorrectionForm.propTypes = {
   isUpdated: PropTypes.bool,
   isLoading: PropTypes.bool,
   isFetched: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   updateStudentData: PropTypes.func,
 };
 
@@ -554,6 +387,7 @@ StudentRegistrationCorrectionForm.defaultProps = {
   isUpdated: false,
   isLoading: false,
   isFetched: false,
+  isAdmin: false,
   updateStudentData: () => {},
 };
 
@@ -562,6 +396,7 @@ const mapStateToProps = state => ({
   isUpdated: isUpdated(state),
   isLoading: isLoading(state),
   isFetched: isFetched(state),
+  isAdmin: isAdmin(state),
 });
 
 export default connect(mapStateToProps, {

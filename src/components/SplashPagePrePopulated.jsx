@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
-import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { adminKey } from '../utils/yjsgConstants';
 import LinkButton from './commonComponents/LinkButton';
 import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
-import { fetchStudentData, setAdminAccess, setStudentCredentials } from '../actions/studentRegistrationActions';
+import { fetchStudentData, setAdminAccess } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
 import { setRegistrationData } from '../utils/registrationFormUtils';
-import { getParameterByName } from '../utils/http';
+import { getUserIdByParams, getUserSecretKeyByParams } from '../reducers/studentRegistrationReducer';
 
 class SplashPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isCorrection: false,
+      isCorrection: true,
       credentials: {},
       isURLParams: false
     };
@@ -30,55 +29,14 @@ class SplashPage extends Component {
     this._fetchStudentById = this.fetchStudentById.bind(this);
   }
 
-  componentWillMount() {
-    const id = getParameterByName('id');
-    const secretCode = getParameterByName('secCode');
-    if (id && secretCode) {
-      this.fetchStudentByURLParams(id, secretCode);
+  componentWillReceiveProps(nextProps) {
+      this.setState({
+        credentials: {
+          studentId: nextProps.id,
+          secretKey: nextProps.secretKey,
+        }
+      })
     }
-  }
-
-  fetchStudentByURLParams(id, secretCode) {
-    if (secretCode === adminKey) {
-      this.props.setAdminAccess();
-    }
-    this.props.setStudentCredentials(id,
-      secretCode);
-    this.props.fetchStudentData(id, secretCode);
-    this.setState({
-      isURLParams: true,
-    })
-  }
-
-  enableEditInfo() {
-    this.setState({
-      isCorrection: true,
-    })
-  }
-
-  disableEditInfo() {
-    this.setState({
-      isCorrection: false,
-    })
-  }
-
-  fetchStudentById () {
-    if (this.state.credentials.secretKey === adminKey) {
-      this.props.setAdminAccess();
-    }
-    this.props.setStudentCredentials(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-    this.props.fetchStudentData(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-  };
-
-  handleInputChange(value, name) {
-    let updatedData = extend(cloneDeep(this.state.credentials),
-      setRegistrationData(value, name));
-    this.setState({
-      credentials: updatedData,
-    });
-  }
 
   renderCorrectionIdField() {
     if (this.state.isCorrection) {
@@ -129,10 +87,35 @@ class SplashPage extends Component {
     }
   }
 
-  render() {
-    if (this.state.isURLParams) {
-      return <Switch><Redirect to={'/studentCorrection'} /></Switch>
+  enableEditInfo() {
+    this.setState({
+      isCorrection: true,
+    })
+  }
+
+  disableEditInfo() {
+    this.setState({
+      isCorrection: false,
+    })
+  }
+
+  fetchStudentById () {
+    if (this.state.credentials.secretKey === adminKey) {
+      this.props.setAdminAccess();
     }
+    this.props.fetchStudentData(this.state.credentials.studentId,
+      this.state.credentials.secretKey);
+  };
+
+  handleInputChange(value, name) {
+    let updatedData = extend(cloneDeep(this.state.credentials),
+      setRegistrationData(value, name));
+    this.setState({
+      credentials: updatedData,
+    });
+  }
+
+  render() {
     return (
       <div className={'landingPageContainer'}>
         <h2>{'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) पोर्टल'}</h2>
@@ -143,8 +126,8 @@ class SplashPage extends Component {
           <div className={'landingPageButtonContainer'}>
             {this.renderCorrectionIdField()}
           </div>
-      </div>
-    </div>)
+        </div>
+      </div>)
   }
 }
 
@@ -156,8 +139,12 @@ SplashPage.defaultProps = {
   fetchStudentData: () => {},
 };
 
-export default connect(null, {
+const mapStateToProps = state => ({
+  id: getUserIdByParams(state),
+  secretKey: getUserSecretKeyByParams(state),
+});
+
+export default connect(mapStateToProps, {
   fetchStudentData,
-  setAdminAccess,
-  setStudentCredentials,
+  setAdminAccess
 })(SplashPage);
