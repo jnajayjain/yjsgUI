@@ -200,7 +200,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <h5>{'आपकी जानकारी सफलता पूर्वक अपडेट कर दी गई है |'}</h5>
             <LinkButton
               buttonText={'वापस जाओ'}
-              linkPath={'/'}
+              linkPath={'/splashPrePopulated'}
             />
           </div>
         </div>
@@ -213,7 +213,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <h5>{'जानकारी में कोई बदलाव नहीं '}</h5>
             <LinkButton
               buttonText={'वापस जाओ'}
-              linkPath={'/'}
+              linkPath={'/splashPrePopulated'}
             />
           </div>
         </div>
