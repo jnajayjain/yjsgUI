@@ -240,6 +240,6 @@ export const isDataCorrect = (studentData) => {
 };
 
 export const checkLevelValue = (value) => {
-  let level = value ? value.slice(6, 8) : ''  ;
+  let level = value ? value.slice(6, 8) : -1  ;
   return(Number(level));
 };

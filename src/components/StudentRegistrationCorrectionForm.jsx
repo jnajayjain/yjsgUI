@@ -80,17 +80,26 @@ class StudentRegistrationCorrectionForm extends Component {
     });
   }
 
-  componentDidMount() {
-    this.checkError({email: '', motherMobile: ''});
+  prePopulateCourse2018(nextProps) {
+    const lastCourse = nextProps.studentData.classAttended2017;
+    const level = checkLevelValue(lastCourse);
+    if (level > 0) {
+      const updatedData = extend(cloneDeep(this.state.student), {course2018: level + 1});
+      this.setState({
+        student: updatedData,
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.studentData) {
+      this.prePopulateCourse2018(nextProps);
       this.setState({
         student: nextProps.studentData,
         isValidId: true,
         isSubmitTriggered: false,
-      })
+      });
+      this.checkError({email: '', motherMobile: ''});
     }
   }
 
@@ -149,7 +158,6 @@ class StudentRegistrationCorrectionForm extends Component {
   handleInputChange(value, name) {
     let errorMessageObject = {} ;
      errorMessageObject[name]= validateInput(value, name);
-
     let updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
     let updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
@@ -160,36 +168,6 @@ class StudentRegistrationCorrectionForm extends Component {
       isSubmitTriggered: false,
     });
     this.checkError(updatedData);
-  }
-
-  renderCourse2018() {
-    const lastCourse = this.props.studentData.classAttended2017;
-    const level = checkLevelValue(lastCourse);
-    if (level) {
-      return (
-        <SelectListInputField
-          name={'course2018'}
-          label={'आप क्या अध्ययन करना चाहते हैं ?'}
-          options={studiesArray}
-          onInputChange={this._handleInputChange}
-          value={`Level ${level + 1}`}
-          isRequired={true}
-          disabled={true}
-          errorMessage={this.state.errorMessage.course2018['message']}
-        />
-      )
-    }
-    return (
-      <SelectListInputField
-        name={'course2018'}
-        label={'आप क्या अध्ययन करना चाहते हैं ?'}
-        options={studiesArray}
-        onInputChange={this._handleInputChange}
-        value={this.state.student.course2018}
-        isRequired={true}
-        errorMessage={this.state.errorMessage.course2018['message']}
-      />
-    )
   }
 
   renderSuccessMessage() {
@@ -335,7 +313,15 @@ class StudentRegistrationCorrectionForm extends Component {
               errorMessage={this.state.errorMessage.busStop['message']}
             />
             {this.renderClassAttended2017()}
-            {this.renderCourse2018()}
+            <SelectListInputField
+              name={'course2018'}
+              label={'आप क्या अध्ययन करना चाहते हैं ?'}
+              options={studiesArray}
+              onInputChange={this._handleInputChange}
+              value={this.state.student.course2018}
+              isRequired={true}
+              errorMessage={this.state.errorMessage.course2018['message']}
+            />
             <SelectListInputField
               name={'optIn2018'}
               label={'2018 के शिविर की स्वीकृति ?'}
