@@ -184,5 +184,3 @@ export const yesOrNo = [
     value: 0
   }
 ];
-
-export const adminKey = '451725';
