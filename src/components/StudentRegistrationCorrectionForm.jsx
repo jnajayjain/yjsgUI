@@ -348,7 +348,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <div className={'registrationFormButtonContainer'}>
               <LinkButton
                 buttonText={'वापस जाओ'}
-                linkPath={'/'}
+                linkPath={'/splashPrePopulated'}
               />
               <Button
                 buttonText={'जानकारी अपडेट करें'}

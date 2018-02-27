@@ -12,7 +12,10 @@ import {
 } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
 import LinkButton from './commonComponents/LinkButton';
-import { createStudentData } from '../actions/studentRegistrationActions';
+import {
+  createStudentData,
+  setStudentCredentials,
+} from '../actions/studentRegistrationActions';
 import {
   isDataCorrect,
   isValidUserInfo,
@@ -110,6 +113,8 @@ class StudentRegistrationForm extends Component {
   renderSuccessMessage() {
     if(this.props.isCreated && this.state.isSubmitTriggered){
       const student = this.props.newStudent;
+
+      this.props.setStudentCredentials(student.id, student.secretKey);
       return (
         <div className={"popup"}>
           <div className={"popupContainer"}>
@@ -120,7 +125,7 @@ class StudentRegistrationForm extends Component {
              <p>{`शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |`}</p>
             <LinkButton
               buttonText={'वापस जाओ'}
-              linkPath={'/'}
+              linkPath={'/splashPrePopulated'}
             />
           </div>
         </div>
@@ -289,6 +294,7 @@ StudentRegistrationForm.propTypes = {
   isCreated: PropTypes.bool,
   newStudent: PropTypes.object,
   createStudentData: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
 };
 
 StudentRegistrationForm.defaultProps = {
@@ -296,6 +302,7 @@ StudentRegistrationForm.defaultProps = {
   isCreated: false,
   newStudent: {},
   createStudentData: () => {},
+  setStudentCredentials: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -306,5 +313,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   createStudentData,
+  setStudentCredentials,
 })(StudentRegistrationForm);
 
