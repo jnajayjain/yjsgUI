@@ -42,7 +42,7 @@ class StudentRegistrationCorrectionForm extends Component {
         fatherName: '',
         gender: '',
         age: '',
-        fatherMobile: '',
+        mobile: '',
         motherMobile: '',
         email: '',
         address: '',
@@ -58,7 +58,7 @@ class StudentRegistrationCorrectionForm extends Component {
         fatherName: {},
         gender: {},
         age: {},
-        fatherMobile: {},
+        mobile: {},
         motherMobile: {},
         email: {},
         address: {},
@@ -226,7 +226,7 @@ class StudentRegistrationCorrectionForm extends Component {
             />
             <InputField
               type={'text'}
-              label={'पिता का नाम'}
+              label={'पिता / पति का नाम'}
               name={'fatherName'}
               onInputChange={this._handleInputChange}
               value={this.state.student.fatherName}
@@ -254,11 +254,11 @@ class StudentRegistrationCorrectionForm extends Component {
             <InputField
               type={'number'}
               label={'मोबाइल नं.'}
-              name={'fatherMobile'}
+              name={'mobile'}
               onInputChange={this._handleInputChange}
-              value={this.state.student.fatherMobile}
+              value={this.state.student.mobile}
               isRequired={true}
-              errorMessage={this.state.errorMessage.fatherMobile['message']}
+              errorMessage={this.state.errorMessage.mobile['message']}
             />
             <InputField
               type={'number'}

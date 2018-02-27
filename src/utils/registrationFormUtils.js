@@ -26,7 +26,7 @@ export const validateInput = (value, name) => {
   if (name === 'age') {
     return ageValidate(value, name);
   }
-  if (name === 'fatherMobile') {
+  if (name === 'mobile') {
     return mobileValidate(value, name);
   }
   if (name === 'motherMobile') {
@@ -217,7 +217,7 @@ export const isValidUserInfo = (errorMessageObject) => {
     errorMessageObject.fatherName['isValid_fatherName'] &&
     errorMessageObject.age['isValid_age'] &&
     errorMessageObject.gender['isValid_gender'] &&
-    errorMessageObject.fatherMobile['isValid_fatherMobile'] &&
+    errorMessageObject.mobile['isValid_mobile'] &&
     errorMessageObject.motherMobile['isValid_motherMobile'] &&
     errorMessageObject.email['isValid_email'] &&
     errorMessageObject.address['isValid_address'] &&
