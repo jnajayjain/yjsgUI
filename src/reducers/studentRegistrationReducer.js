@@ -4,7 +4,6 @@ const initialState = {
   isFetched: false,
   isUpdated: false,
   isCreated: false,
-  isAdmin: false,
   id: '',
   secretKey: '',
   updateMessage: '',
@@ -20,12 +19,6 @@ const studentRegistrationReducer = (state = initialState, action) => {
         isLoading: true,
         isCreated: false,
       };
-    case 'SET_ADMIN_ACCESS':
-      return {
-        ...state,
-        isAdmin: true,
-      };
-
     case 'FETCH_STUDENT':
       return {
         ...state,
@@ -62,7 +55,6 @@ const studentRegistrationReducer = (state = initialState, action) => {
         updatedStudent: {...state.student, ...action.student},
         isLoading: false,
         isUpdated: true,
-        isAdmin: false,
       };
 
     case 'FETCH_STUDENT_SUCCESS_ACTION':
@@ -78,7 +70,6 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isCreated: false,
-        isAdmin: false,
       };
 
     case 'UPDATE_STUDENT_FAILED_ACTION':
@@ -86,7 +77,6 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isUpdated: false,
-        isAdmin: false,
       };
 
     case 'FETCH_STUDENT_FAILED_ACTION':
@@ -94,7 +84,6 @@ const studentRegistrationReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isFetched: false,
-        isAdmin: false,
       };
 
     default: {
@@ -121,8 +110,6 @@ export const isFetched = state => state.studentRegistrationReducer.isFetched;
 
 export const updateMessage = state => state.studentRegistrationReducer.student.message;
 
-export const isAdmin = state => state.studentRegistrationReducer.isAdmin;
+export const getUserId = state => state.studentRegistrationReducer.id;
 
-export const getUserIdByParams = state => state.studentRegistrationReducer.id;
-
-export const getUserSecretKeyByParams = state => state.studentRegistrationReducer.secretKey;
+export const getUserSecretKey = state => state.studentRegistrationReducer.secretKey;

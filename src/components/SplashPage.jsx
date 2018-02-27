@@ -5,11 +5,10 @@ import extend from 'lodash/extend';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { adminKey } from '../utils/yjsgConstants';
 import LinkButton from './commonComponents/LinkButton';
 import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
-import { fetchStudentData, setAdminAccess, setStudentCredentials } from '../actions/studentRegistrationActions';
+import { fetchStudentData, setStudentCredentials } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
@@ -39,11 +38,7 @@ class SplashPage extends Component {
   }
 
   fetchStudentByURLParams(id, secretCode) {
-    if (secretCode === adminKey) {
-      this.props.setAdminAccess();
-    }
-    this.props.setStudentCredentials(id,
-      secretCode);
+    this.props.setStudentCredentials(id, secretCode);
     this.props.fetchStudentData(id, secretCode);
     this.setState({
       isURLParams: true,
@@ -63,9 +58,6 @@ class SplashPage extends Component {
   }
 
   fetchStudentById () {
-    if (this.state.credentials.secretKey === adminKey) {
-      this.props.setAdminAccess();
-    }
     this.props.setStudentCredentials(this.state.credentials.studentId,
       this.state.credentials.secretKey);
     this.props.fetchStudentData(this.state.credentials.studentId,
@@ -158,6 +150,5 @@ SplashPage.defaultProps = {
 
 export default connect(null, {
   fetchStudentData,
-  setAdminAccess,
   setStudentCredentials,
 })(SplashPage);

@@ -34,7 +34,9 @@ class SelectListInputField extends Component {
       label,
       isRequired,
       errorMessage,
+      disabled,
     } = this.props;
+
     const newLabel = isRequired ? `${label} * ` : label;
 
     if ( errorMessage ) {
@@ -48,6 +50,7 @@ class SelectListInputField extends Component {
                 name={name}
                 onChange={this._handleOnChange}
                 value={this._populateValue(value)}
+                disabled={disabled}
               >
                 <option value="select" disabled>{'कृपया एक चुनिए . . .'}</option>
                 {this.renderOptionStatements()}
@@ -68,6 +71,7 @@ class SelectListInputField extends Component {
               name={name}
               onChange={this._handleOnChange}
               value={this._populateValue(value)}
+              disabled={disabled}
             >
               <option value="select" disabled>{'कृपया एक चुनिए . . .'}</option>
               {this.renderOptionStatements()}
@@ -90,6 +94,7 @@ SelectListInputField.propTypes = {
   label: PropTypes.string,
   errorMessage: PropTypes.string,
   isRequired: PropTypes.bool,
+  disabled: PropTypes.bool,
   onInputChange: PropTypes.func,
 };
 
@@ -98,6 +103,7 @@ SelectListInputField.defaultProps = {
   options: [],
   value: '',
   isRequired: false,
+  disabled: false,
   errorMessage: '',
   label: '',
   onInputChange: () => {},

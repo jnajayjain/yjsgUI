@@ -4,14 +4,13 @@ import cloneDeep from 'lodash/cloneDeep';
 import extend from 'lodash/extend';
 import PropTypes from 'prop-types';
 
-import { adminKey } from '../utils/yjsgConstants';
 import LinkButton from './commonComponents/LinkButton';
 import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
-import { fetchStudentData, setAdminAccess } from '../actions/studentRegistrationActions';
+import { fetchStudentData, setStudentCredentials } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
 import { setRegistrationData } from '../utils/registrationFormUtils';
-import { getUserIdByParams, getUserSecretKeyByParams } from '../reducers/studentRegistrationReducer';
+import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
 
 class SplashPage extends Component {
   constructor(props) {
@@ -30,13 +29,49 @@ class SplashPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      this.setState({
-        credentials: {
-          studentId: nextProps.id,
-          secretKey: nextProps.secretKey,
-        }
-      })
-    }
+    this.setState({
+      credentials: {
+        studentId: nextProps.id,
+        secretKey: nextProps.secretKey,
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      credentials: {
+        studentId: this.props.id,
+        secretKey: this.props.secretKey,
+      }
+    });
+  }
+
+  enableEditInfo() {
+    this.setState({
+      isCorrection: true,
+    })
+  }
+
+  disableEditInfo() {
+    this.setState({
+      isCorrection: false,
+    })
+  }
+
+  fetchStudentById () {
+    this.props.setStudentCredentials(this.state.credentials.studentId,
+      this.state.credentials.secretKey);
+    this.props.fetchStudentData(this.state.credentials.studentId,
+      this.state.credentials.secretKey);
+  };
+
+  handleInputChange(value, name) {
+    let updatedData = extend(cloneDeep(this.state.credentials),
+      setRegistrationData(value, name));
+    this.setState({
+      credentials: updatedData,
+    });
+  }
 
   renderCorrectionIdField() {
     if (this.state.isCorrection) {
@@ -87,34 +122,6 @@ class SplashPage extends Component {
     }
   }
 
-  enableEditInfo() {
-    this.setState({
-      isCorrection: true,
-    })
-  }
-
-  disableEditInfo() {
-    this.setState({
-      isCorrection: false,
-    })
-  }
-
-  fetchStudentById () {
-    if (this.state.credentials.secretKey === adminKey) {
-      this.props.setAdminAccess();
-    }
-    this.props.fetchStudentData(this.state.credentials.studentId,
-      this.state.credentials.secretKey);
-  };
-
-  handleInputChange(value, name) {
-    let updatedData = extend(cloneDeep(this.state.credentials),
-      setRegistrationData(value, name));
-    this.setState({
-      credentials: updatedData,
-    });
-  }
-
   render() {
     return (
       <div className={'landingPageContainer'}>
@@ -140,11 +147,11 @@ SplashPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  id: getUserIdByParams(state),
-  secretKey: getUserSecretKeyByParams(state),
+  id: getUserId(state),
+  secretKey: getUserSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
   fetchStudentData,
-  setAdminAccess
+  setStudentCredentials
 })(SplashPage);

@@ -212,6 +212,18 @@ export const requireFieldsValidate = (value, name) => {
  * @return {boolean} isValid
  */
 export const isValidUserInfo = (errorMessageObject) => {
+
+  console.log("caliduserinfo", errorMessageObject.name['isValid_name'] ,
+    errorMessageObject.fatherName['isValid_fatherName'] ,
+    errorMessageObject.age['isValid_age'] ,
+    errorMessageObject.gender['isValid_gender'] ,
+    errorMessageObject.fatherMobile['isValid_fatherMobile'] ,
+    errorMessageObject.motherMobile['isValid_motherMobile'] ,
+    errorMessageObject.email['isValid_email'] ,
+    errorMessageObject.address['isValid_address'] ,
+    errorMessageObject.busStop['isValid_busStop'] ,
+    errorMessageObject.optIn2018['isValid_optIn2018'] ,
+    errorMessageObject.course2018['isValid_course2018'])
   let isValid = false;
   if (errorMessageObject.name['isValid_name'] &&
     errorMessageObject.fatherName['isValid_fatherName'] &&
@@ -236,4 +248,9 @@ export const isDataCorrect = (studentData) => {
    errorMessageObject[info] = validateInput(studentData[info], info);
   }
   return errorMessageObject;
+};
+
+export const checkLevelValue = (value) => {
+  let level = value ? value.slice(6, 8) : ''  ;
+  return(Number(level));
 };

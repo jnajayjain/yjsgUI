@@ -11,18 +11,18 @@ import {
   gender,
   yesOrNo,
 } from '../utils/yjsgConstants';
-import { adminKey } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
 import LinkButton from './commonComponents/LinkButton';
 import { updateStudentData } from '../actions/studentRegistrationActions';
 import {
+  checkLevelValue,
   isDataCorrect,
   isValidUserInfo,
   setRegistrationData,
   validateInput,
 } from '../utils/registrationFormUtils';
 import {
-  getStudent, isAdmin,
+  getStudent,
   isFetched,
   isLoading,
   isUpdated,
@@ -30,7 +30,7 @@ import {
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import TextAreaField from './formComponents/TextAreaField';
-import { getParameterByName } from '../utils/http';
+import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
 
 class StudentRegistrationCorrectionForm extends Component {
   constructor(props) {
@@ -99,21 +99,15 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   updateStudentData() {
-    const id = getParameterByName('id');
-    const secretCode = getParameterByName('secCode');
-    if (id && secretCode) {
-      this.props.updateStudentData(id, secretCode, this.state.student);
-    } else if (this.props.isAdmin) {
-      this.props.updateStudentData(this.props.studentData.id, adminKey, this.state.student);
-    } else {
-      this.props.updateStudentData(this.props.studentData['id'],
-        this.props.studentData['secretKey'],
-        this.state.student);
-    }
+    console.log("update student called");
+    this.props.updateStudentData(this.props.id,
+      this.props.secretKey,
+      this.state.student);
   }
 
   submitStudentData() {
     this.checkError(this.state.student);
+    console.log("this.isValidData()", this.isValidData());
     if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
       this.setState({
         isSubmitTriggered: true,
@@ -170,6 +164,36 @@ class StudentRegistrationCorrectionForm extends Component {
     this.checkError(updatedData);
   }
 
+  renderCourse2018() {
+    const lastCourse = this.props.studentData.classAttended2017;
+    const level = checkLevelValue(lastCourse);
+    if (level) {
+      return (
+        <SelectListInputField
+          name={'course2018'}
+          label={'आप क्या अध्ययन करना चाहते हैं ?'}
+          options={studiesArray}
+          onInputChange={this._handleInputChange}
+          value={`Level ${level + 1}`}
+          isRequired={true}
+          disabled={true}
+          errorMessage={this.state.errorMessage.course2018['message']}
+        />
+      )
+    }
+    return (
+      <SelectListInputField
+        name={'course2018'}
+        label={'आप क्या अध्ययन करना चाहते हैं ?'}
+        options={studiesArray}
+        onInputChange={this._handleInputChange}
+        value={this.state.student.course2018}
+        isRequired={true}
+        errorMessage={this.state.errorMessage.course2018['message']}
+      />
+    )
+  }
+
   renderSuccessMessage() {
     if(this.props.isUpdated){
       return (
@@ -200,6 +224,8 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   render() {
+    console.log("correctionform state", this.state);
+    console.log("correctionform props", this.props);
     if (this.props.studentData && this.props.isFetched) {
       return (
         <div className={'registrationFormContainer'}>
@@ -312,16 +338,8 @@ class StudentRegistrationCorrectionForm extends Component {
               isRequired={true}
               errorMessage={this.state.errorMessage.busStop['message']}
             />
-            <SelectListInputField
-              name={'course2018'}
-              label={'आप क्या अध्ययन करना चाहते हैं ?'}
-              options={studiesArray}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.course2018}
-              isRequired={true}
-              errorMessage={this.state.errorMessage.course2018['message']}
-            />
             {this.renderClassAttended2017()}
+            {this.renderCourse2018()}
             <SelectListInputField
               name={'optIn2018'}
               label={'2018 के शिविर की स्वीकृति ?'}
@@ -378,7 +396,6 @@ StudentRegistrationCorrectionForm.propTypes = {
   isUpdated: PropTypes.bool,
   isLoading: PropTypes.bool,
   isFetched: PropTypes.bool,
-  isAdmin: PropTypes.bool,
   updateStudentData: PropTypes.func,
 };
 
@@ -387,7 +404,6 @@ StudentRegistrationCorrectionForm.defaultProps = {
   isUpdated: false,
   isLoading: false,
   isFetched: false,
-  isAdmin: false,
   updateStudentData: () => {},
 };
 
@@ -396,7 +412,8 @@ const mapStateToProps = state => ({
   isUpdated: isUpdated(state),
   isLoading: isLoading(state),
   isFetched: isFetched(state),
-  isAdmin: isAdmin(state),
+  id: getUserId(state),
+  secretKey: getUserSecretKey(state),
 });
 
 export default connect(mapStateToProps, {
