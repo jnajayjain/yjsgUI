@@ -99,7 +99,6 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   updateStudentData() {
-    console.log("update student called");
     this.props.updateStudentData(this.props.id,
       this.props.secretKey,
       this.state.student);
@@ -107,7 +106,6 @@ class StudentRegistrationCorrectionForm extends Component {
 
   submitStudentData() {
     this.checkError(this.state.student);
-    console.log("this.isValidData()", this.isValidData());
     if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
       this.setState({
         isSubmitTriggered: true,
@@ -224,8 +222,6 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   render() {
-    console.log("correctionform state", this.state);
-    console.log("correctionform props", this.props);
     if (this.props.studentData && this.props.isFetched) {
       return (
         <div className={'registrationFormContainer'}>

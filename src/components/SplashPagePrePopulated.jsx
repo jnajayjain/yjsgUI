@@ -140,10 +140,12 @@ class SplashPage extends Component {
 
 SplashPage.propTypes = {
   fetchStudentData: PropTypes.func,
+  setStudentCredentials: PropTypes.func,
 };
 
 SplashPage.defaultProps = {
   fetchStudentData: () => {},
+  setStudentCredentials: () => {},
 };
 
 const mapStateToProps = state => ({

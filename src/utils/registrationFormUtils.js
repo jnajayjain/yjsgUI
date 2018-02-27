@@ -213,17 +213,6 @@ export const requireFieldsValidate = (value, name) => {
  */
 export const isValidUserInfo = (errorMessageObject) => {
 
-  console.log("caliduserinfo", errorMessageObject.name['isValid_name'] ,
-    errorMessageObject.fatherName['isValid_fatherName'] ,
-    errorMessageObject.age['isValid_age'] ,
-    errorMessageObject.gender['isValid_gender'] ,
-    errorMessageObject.fatherMobile['isValid_fatherMobile'] ,
-    errorMessageObject.motherMobile['isValid_motherMobile'] ,
-    errorMessageObject.email['isValid_email'] ,
-    errorMessageObject.address['isValid_address'] ,
-    errorMessageObject.busStop['isValid_busStop'] ,
-    errorMessageObject.optIn2018['isValid_optIn2018'] ,
-    errorMessageObject.course2018['isValid_course2018'])
   let isValid = false;
   if (errorMessageObject.name['isValid_name'] &&
     errorMessageObject.fatherName['isValid_fatherName'] &&
