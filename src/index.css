@@ -312,6 +312,18 @@ input, select, textarea {
   top: 5px;
 }
 
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 @media (max-width:1280px) {
   .inputFieldContainer{
     max-width: 97%;
@@ -363,11 +375,27 @@ input, select, textarea {
   .registrationFormContainer {
     height: calc(100% - 115px);
   }
+  .landingPageButtonContainer {
+    padding-bottom: 20px;
+  }
   .footer {
     font-size: 13px;
     line-height: 16px;
   }
   .contact-no-footer{
     display: block;
+  }
+}
+@media (max-width:360px) {
+  .landingPageLogo {
+    max-width: 80px;
+  }
+  .landingPageContent {
+    max-height: 80%;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  .landingPageButtonContainer .inputText {
+    padding: 10px 5px;
   }
 }
