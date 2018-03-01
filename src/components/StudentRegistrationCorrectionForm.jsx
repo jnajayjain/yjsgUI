@@ -12,24 +12,24 @@ import {
   yesOrNo,
 } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
+import TextAreaField from './formComponents/TextAreaField';
 import LinkButton from './commonComponents/LinkButton';
 import { updateStudentData } from '../actions/studentRegistrationActions';
 import {
-  checkLevelValue,
-  isDataCorrect,
-  isValidUserInfo,
-  setRegistrationData,
-  validateInput,
+checkLevelValue,
+isDataCorrect,
+isValidUserInfo,
+setRegistrationData,
+validateInput,
 } from '../utils/registrationFormUtils';
 import {
-  getStudent,
-  isFetched,
-  isLoading,
-  isUpdated,
+getStudent,
+isFetched,
+isLoading,
+isUpdated,
 } from '../reducers/studentRegistrationReducer';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
-import TextAreaField from './formComponents/TextAreaField';
 import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
 
 class StudentRegistrationCorrectionForm extends Component {
@@ -128,33 +128,6 @@ class StudentRegistrationCorrectionForm extends Component {
     }
   }
 
-  renderClassAttended2017() {
-    if(this.props.studentData.classAttended2017) {
-      return (
-        <InputField
-          type={'text'}
-          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
-          name={'classAttended2017'}
-          onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2017}
-          isRequired={false}
-          disabled={true}
-        />
-      )
-    } else {
-      return (
-        <InputField
-          type={'text'}
-          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
-          name={'classAttended2017'}
-          onInputChange={this._handleInputChange}
-          value={this.state.student.classAttended2017}
-          isRequired={false}
-        />
-      )
-    }
-  }
-
   handleInputChange(value, name) {
     let errorMessageObject = {} ;
      errorMessageObject[name]= validateInput(value, name);
@@ -197,6 +170,33 @@ class StudentRegistrationCorrectionForm extends Component {
         </div>
       );
     } else return null;
+  }
+
+  renderClassAttended2017() {
+    if(this.props.studentData.classAttended2017) {
+      return (
+        <InputField
+          type={'text'}
+          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
+          name={'classAttended2017'}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2017}
+          isRequired={false}
+          disabled={true}
+        />
+      )
+    } else {
+      return (
+        <InputField
+          type={'text'}
+          label={'पूर्व में किये गए धार्मिक अध्ययन का विवरण'}
+          name={'classAttended2017'}
+          onInputChange={this._handleInputChange}
+          value={this.state.student.classAttended2017}
+          isRequired={false}
+        />
+      )
+    }
   }
 
   render() {
@@ -332,13 +332,13 @@ class StudentRegistrationCorrectionForm extends Component {
               errorMessage={this.state.errorMessage.optIn2018['message']}
             />
             <div className={'registrationFormButtonContainer'}>
-              <LinkButton
-                buttonText={'वापस जाओ'}
-                linkPath={'/splashPrePopulated'}
-              />
               <Button
                 buttonText={'जानकारी अपडेट करें'}
                 onClick={this._submitStudentData}
+              />
+              <LinkButton
+                buttonText={'वापस जाओ'}
+                linkPath={'/splashPrePopulated'}
               />
             </div>
           </div>

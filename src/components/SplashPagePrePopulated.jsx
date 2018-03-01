@@ -84,7 +84,6 @@ class SplashPage extends Component {
             placeholder={'अपना आई.डी. नं. दर्ज करें'}
             onInputChange={this._handleInputChange}
             value={this.state.credentials.studentId}
-            min={0}
           />
           <InputField
             type={'text'}
@@ -93,7 +92,6 @@ class SplashPage extends Component {
             placeholder={'अपना सीक्रेट कोड दर्ज करें'}
             onInputChange={this._handleInputChange}
             value={this.state.credentials.secretKey}
-            min={0}
           />
           <LinkButton
             buttonText={'रजिस्ट्रेशन सुधारें'}

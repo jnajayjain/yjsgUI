@@ -102,7 +102,7 @@ export const addressValidate = (value, name) => {
     errorMessageObject['message'] = 'यह जानकारी अनिवार्य है';
     errorMessageObject[`isValid_${name}`] = false;
   } else if (value.length < 15) {
-    errorMessageObject['message'] = 'पता १५ अक्षर से कम का मान्य नहीं';
+    errorMessageObject['message'] = 'कृपया पूरा पता देंवे! यह जानकारी आपसे संपर्क करने में उपयोगी है!';
     errorMessageObject[`isValid_${name}`] = false;
   } else {
     errorMessageObject['message'] = '';

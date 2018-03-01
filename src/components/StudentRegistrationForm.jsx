@@ -11,25 +11,25 @@ import {
   yesOrNo,
 } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
+import TextAreaField from './formComponents/TextAreaField';
 import LinkButton from './commonComponents/LinkButton';
 import {
-  createStudentData,
-  setStudentCredentials,
+createStudentData,
+setStudentCredentials,
 } from '../actions/studentRegistrationActions';
 import {
-  isDataCorrect,
-  isValidUserInfo,
-  setRegistrationData,
-  validateInput,
+isDataCorrect,
+isValidUserInfo,
+setRegistrationData,
+validateInput,
 } from '../utils/registrationFormUtils';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import {
-  getNewStudent,
-  isCreated,
-  isLoading,
+getNewStudent,
+isCreated,
+isLoading,
 } from '../reducers/studentRegistrationReducer';
-import TextAreaField from './formComponents/TextAreaField';
 
 class StudentRegistrationForm extends Component {
   constructor(props) {
@@ -144,7 +144,6 @@ class StudentRegistrationForm extends Component {
         </div>
       );
     }
-
     return (
       <div className={'registrationFormContainer'}>
         {this.renderSuccessMessage()}
@@ -274,13 +273,13 @@ class StudentRegistrationForm extends Component {
             errorMessage={this.state.errorMessage.optIn2018['message']}
           />
           <div className={'registrationFormButtonContainer'}>
-            <LinkButton
-              buttonText={'वापस जाओ'}
-              linkPath={'/'}
-            />
             <Button
               buttonText={'रजिस्ट्रेशन करें'}
               onClick={this._submitStudentData}
+            />
+            <LinkButton
+              buttonText={'वापस जाओ'}
+              linkPath={'/'}
             />
           </div>
         </div>

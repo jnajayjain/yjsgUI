@@ -30,8 +30,6 @@ class InputField extends Component {
       errorMessage,
       isRequired,
       disabled,
-      min,
-      max,
     } = this.props;
 
     const newLabel = isRequired ? `${label} * ` : label;
@@ -48,8 +46,6 @@ class InputField extends Component {
                 placeholder={placeholder}
                 onChange={this._handleOnChange}
                 value={this._populateValue()}
-                min={min}
-                max={max}
                 disabled={disabled}
               />
             </div>
@@ -69,8 +65,6 @@ class InputField extends Component {
               placeholder={placeholder}
               onChange={this._handleOnChange}
               value={this._populateValue()}
-              min={min}
-              max={max}
               disabled={disabled}
             />
           </div>
@@ -111,6 +105,4 @@ InputField.defaultProps = {
   value: '',
   isRequired: false,
   disabled: false,
-  min: 0,
-  max: 0,
 };
