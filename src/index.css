@@ -68,9 +68,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .yjsgEventInfo {
-  top: 50px;
+  margin: 15px 0 0;
+  text-align: center;
+  line-height: 30px;
 }
-
+.primary-color {
+  color: #ee7c2a;
+}
 .linkButton {
   color: rgb(255, 255, 255);
   background-color: #ee7c2a;
@@ -396,6 +400,13 @@ input[type=number]::-webkit-outer-spin-button {
   }
   .contact-no-footer{
     display: block;
+  }
+  .landingPageContent {
+    justify-content: flex-start;
+  }
+  .yjsgEventInfo {
+    font-size: 12px;
+    line-height: 25px;
   }
 }
 @media (max-width:360px) {

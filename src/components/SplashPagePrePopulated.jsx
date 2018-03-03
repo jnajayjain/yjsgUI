@@ -129,11 +129,11 @@ class SplashPage extends Component {
     return (
       <div className={'landingPageContainer'}>
         <h2>{yjsgHeader}</h2>
-        <div className={'yjsgEventInfo'}>
-          <h5>{eventDate}</h5>
-          <h5>{eventVenue}</h5>
-        </div>
         <div className={'landingPageContent'}>
+          <div className={'yjsgEventInfo'}>
+            <h5 className="primary-color">{eventDate}</h5>
+            <h5>{eventVenue}</h5>
+          </div>
           <div className={'landingPageLogo'}>
             <img src={yjsgLogo} alt={'yjsg logo'} />
           </div>
