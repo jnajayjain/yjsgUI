@@ -23,6 +23,7 @@ isValidUserInfo,
 setRegistrationData,
 validateInput,
 } from '../utils/registrationFormUtils';
+import { yjsgHeader } from '../utils/yjsgConstants';
 import SelectListInputField from './formComponents/SelectListInputField';
 import Button from './commonComponents/Button';
 import {
@@ -147,8 +148,17 @@ class StudentRegistrationForm extends Component {
     return (
       <div className={'registrationFormContainer'}>
         {this.renderSuccessMessage()}
-        <h3 className={'registrationFormHeading'}>{'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) रजिस्ट्रेशन फॉर्म'}</h3>
+        <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
         <div className={'inputFieldContainer'}>
+          <SelectListInputField
+            name={'optIn2018'}
+            label={'2018 के शिविर की स्वीकृति ?'}
+            options={yesOrNo}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.optIn2018}
+            isRequired={true}
+            errorMessage={this.state.errorMessage.optIn2018['message']}
+          />
           <InputField
             type={'text'}
             label={'नाम'}
@@ -263,22 +273,13 @@ class StudentRegistrationForm extends Component {
             value={this.state.student.classAttended2017}
             isRequired={false}
           />
-          <SelectListInputField
-            name={'optIn2018'}
-            label={'2018 के शिविर की स्वीकृति ?'}
-            options={yesOrNo}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.optIn2018}
-            isRequired={true}
-            errorMessage={this.state.errorMessage.optIn2018['message']}
-          />
           <div className={'registrationFormButtonContainer'}>
             <Button
-              buttonText={'रजिस्ट्रेशन करें'}
+              buttonText={'Submit'}
               onClick={this._submitStudentData}
             />
             <LinkButton
-              buttonText={'वापस जाओ'}
+              buttonText={'Go Back'}
               linkPath={'/'}
             />
           </div>

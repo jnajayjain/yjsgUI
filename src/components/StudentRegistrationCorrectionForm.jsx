@@ -14,6 +14,7 @@ import {
 import InputField from './formComponents/InputField';
 import TextAreaField from './formComponents/TextAreaField';
 import LinkButton from './commonComponents/LinkButton';
+import { yjsgHeader } from '../utils/yjsgConstants';
 import { updateStudentData } from '../actions/studentRegistrationActions';
 import {
 checkLevelValue,
@@ -204,8 +205,17 @@ class StudentRegistrationCorrectionForm extends Component {
       return (
         <div className={'registrationFormContainer'}>
           {this.renderSuccessMessage()}
-          <h3 className={'registrationFormHeading'}>{'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) रजिस्ट्रेशन फॉर्म'}</h3>
+          <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
           <div className={'inputFieldContainer'}>
+            <SelectListInputField
+              name={'optIn2018'}
+              label={'2018 के शिविर की स्वीकृति ?'}
+              options={yesOrNo}
+              onInputChange={this._handleInputChange}
+              value={this.state.student.optIn2018}
+              isRequired={true}
+              errorMessage={this.state.errorMessage.optIn2018['message']}
+            />
             <InputField
               type={'number'}
               label={'आई.डी.'}
@@ -322,22 +332,13 @@ class StudentRegistrationCorrectionForm extends Component {
               isRequired={true}
               errorMessage={this.state.errorMessage.course2018['message']}
             />
-            <SelectListInputField
-              name={'optIn2018'}
-              label={'2018 के शिविर की स्वीकृति ?'}
-              options={yesOrNo}
-              onInputChange={this._handleInputChange}
-              value={this.state.student.optIn2018}
-              isRequired={true}
-              errorMessage={this.state.errorMessage.optIn2018['message']}
-            />
             <div className={'registrationFormButtonContainer'}>
               <Button
-                buttonText={'जानकारी अपडेट करें'}
+                buttonText={'Submit'}
                 onClick={this._submitStudentData}
               />
               <LinkButton
-                buttonText={'वापस जाओ'}
+                buttonText={'Go Back'}
                 linkPath={'/splashPrePopulated'}
               />
             </div>
@@ -361,7 +362,7 @@ class StudentRegistrationCorrectionForm extends Component {
               <h5>{'आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है ।\n' +
               'कृपया पुनः प्रयास करे ।'}</h5>
               <LinkButton
-                buttonText={'वापस जाओ'}
+                buttonText={'Go Back'}
                 linkPath={'/splashPrePopulated'}
               />
             </div>

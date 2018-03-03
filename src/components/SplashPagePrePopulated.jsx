@@ -9,6 +9,11 @@ import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
 import { fetchStudentData, setStudentCredentials } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
+import {
+  yjsgHeader,
+  eventDate,
+  eventVenue,
+} from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
 
@@ -94,12 +99,12 @@ class SplashPage extends Component {
             value={this.state.credentials.secretKey}
           />
           <LinkButton
-            buttonText={'रजिस्ट्रेशन सुधारें'}
+            buttonText={'View/Edit Information'}
             linkPath={'/studentCorrection'}
             onClick={this._fetchStudentById}
           />
           <Button
-            buttonText={'वापस जाओ'}
+            buttonText={'Go Back'}
             onClick={this._disableEditInfo}
           />
         </div>
@@ -108,11 +113,11 @@ class SplashPage extends Component {
       return (
         <div>
           <Button
-            buttonText={'रजिस्ट्रेशन सुधार'}
+            buttonText={'Already Registered'}
             onClick={this._enableEditInfo}
           />
           <LinkButton
-            buttonText={'नया रजिस्ट्रेशन'}
+            buttonText={'New Registration'}
             linkPath={'/studentRegister'}
           />
         </div>
@@ -123,7 +128,11 @@ class SplashPage extends Component {
   render() {
     return (
       <div className={'landingPageContainer'}>
-        <h2>{'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) पोर्टल'}</h2>
+        <h2>{yjsgHeader}</h2>
+        <div className={'yjsgEventInfo'}>
+          <h5>{eventDate}</h5>
+          <h5>{eventVenue}</h5>
+        </div>
         <div className={'landingPageContent'}>
           <div className={'landingPageLogo'}>
             <img src={yjsgLogo} alt={'yjsg logo'} />

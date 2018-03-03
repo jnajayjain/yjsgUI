@@ -184,3 +184,9 @@ export const yesOrNo = [
     value: 0
   }
 ];
+
+export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) वर्ष';
+
+export const eventDate = 'दिनांक: २९ अप्रैल २०१८, रविवार  से ७ मई २०१८, सोमवार तक';
+
+export const eventVenue = 'स्थान: सन्मति स्कूल, इन्दौर';

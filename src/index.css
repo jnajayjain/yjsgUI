@@ -67,13 +67,17 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.yjsgEventInfo {
+  top: 50px;
+}
+
 .linkButton {
   color: rgb(255, 255, 255);
   background-color: #ee7c2a;
   display: block;
   text-align: center;
-  line-height: 23px;
-  padding: 12px;
+  line-height: 20px;
+  padding: 10px;
   font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
@@ -93,7 +97,7 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #ee7c2a;
   text-align: center;
   font-size: 14px;
-  padding: 12px;
+  padding: 10px;
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
@@ -101,7 +105,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .buttonContainer {
-  width: 150px;
+  width: 170px;
   display: inline-block;
   margin-left: 30px;
   margin-right: 30px;
