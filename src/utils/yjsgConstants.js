@@ -187,6 +187,27 @@ export const yesOrNo = [
 
 export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) वर्ष';
 
+export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र';
+
+export const yjsgFooterContactInfo = '74470-56789';
+
 export const eventDate = 'दिनांक: २९ अप्रैल २०१८, रविवार  से ७ मई २०१८, सोमवार तक';
 
-export const eventVenue = 'स्थान: सन्मति स्कूल, इन्दौर';
+export const eventVenue = 'स्थान: सन्मति स्कूल, (चिड़ियाघर के पास), इन्दौर';
+
+export const goBackBtnText = 'Go Back';
+
+export const formSubmitBtnText = 'Submit';
+
+export const alreadyRegisteredBtnText = 'Already Registered';
+
+export const newRegistrationBtnText = 'New Registration';
+
+export const viewEditInfoBtnText = 'View/Edit Information';
+
+export const invalidIdMessage = 'आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है । कृपया पुनः प्रयास करे ।';
+
+export const noInfoChangeMessage = 'जानकारी में कोई बदलाव नहीं ';
+
+export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलता पूर्वक अपडेट कर दी गई है |';
+

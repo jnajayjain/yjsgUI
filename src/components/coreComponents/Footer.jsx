@@ -1,9 +1,14 @@
 import React from 'react';
 
+import {
+  yjsgFooterText,
+  yjsgFooterContactInfo,
+} from '../../utils/yjsgConstants';
+
 const Footer = (props) => {
     return (
       <div className="footer">
-        <p className="footer-text">{'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र'} <span className="contact-no-footer">{'74470-56789'}</span></p>
+        <p className="footer-text">{yjsgFooterText} <span className="contact-no-footer">{yjsgFooterContactInfo}</span></p>
       </div>)
 };
 

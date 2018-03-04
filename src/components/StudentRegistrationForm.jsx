@@ -9,6 +9,8 @@ import {
   busStops,
   gender,
   yesOrNo,
+  goBackBtnText,
+  formSubmitBtnText,
 } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
 import TextAreaField from './formComponents/TextAreaField';
@@ -125,7 +127,7 @@ class StudentRegistrationForm extends Component {
              <p>{`कृपया अपना ID और सीक्रेट कोड ध्यानपूर्वक नोट कर लेवे |`}</p>
              <p>{`शीघ्र ही आपका ID Card आपके क्षेत्रीय संयोजक द्वारा भेजा जायेगा |`}</p>
             <LinkButton
-              buttonText={'वापस जाओ'}
+              buttonText={goBackBtnText}
               linkPath={'/splashPrePopulated'}
             />
           </div>
@@ -275,11 +277,11 @@ class StudentRegistrationForm extends Component {
           />
           <div className={'registrationFormButtonContainer'}>
             <Button
-              buttonText={'Submit'}
+              buttonText={formSubmitBtnText}
               onClick={this._submitStudentData}
             />
             <LinkButton
-              buttonText={'Go Back'}
+              buttonText={goBackBtnText}
               linkPath={'/'}
             />
           </div>

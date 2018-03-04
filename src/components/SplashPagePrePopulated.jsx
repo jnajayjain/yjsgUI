@@ -13,6 +13,10 @@ import {
   yjsgHeader,
   eventDate,
   eventVenue,
+  goBackBtnText,
+  alreadyRegisteredBtnText,
+  newRegistrationBtnText,
+  viewEditInfoBtnText,
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
@@ -99,12 +103,12 @@ class SplashPage extends Component {
             value={this.state.credentials.secretKey}
           />
           <LinkButton
-            buttonText={'View/Edit Information'}
+            buttonText={viewEditInfoBtnText}
             linkPath={'/studentCorrection'}
             onClick={this._fetchStudentById}
           />
           <Button
-            buttonText={'Go Back'}
+            buttonText={goBackBtnText}
             onClick={this._disableEditInfo}
           />
         </div>
@@ -113,11 +117,11 @@ class SplashPage extends Component {
       return (
         <div>
           <Button
-            buttonText={'Already Registered'}
+            buttonText={alreadyRegisteredBtnText}
             onClick={this._enableEditInfo}
           />
           <LinkButton
-            buttonText={'New Registration'}
+            buttonText={newRegistrationBtnText}
             linkPath={'/studentRegister'}
           />
         </div>

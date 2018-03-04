@@ -10,7 +10,15 @@ import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
 import { fetchStudentData, setStudentCredentials } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
-import { eventDate, eventVenue, yjsgHeader } from '../utils/yjsgConstants';
+import {
+  eventDate,
+  eventVenue,
+  yjsgHeader,
+  goBackBtnText,
+  alreadyRegisteredBtnText,
+  newRegistrationBtnText,
+  viewEditInfoBtnText,
+} from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getParameterByName } from '../utils/http';
 
@@ -94,12 +102,12 @@ class SplashPage extends Component {
             value={this.state.credentials.secretKey}
           />
           <LinkButton
-            buttonText={'View/Edit Information'}
+            buttonText={viewEditInfoBtnText}
             linkPath={'/studentCorrection'}
             onClick={this._fetchStudentById}
           />
           <Button
-            buttonText={'Go Back'}
+            buttonText={goBackBtnText}
             onClick={this._disableEditInfo}
           />
         </div>
@@ -108,11 +116,11 @@ class SplashPage extends Component {
       return (
         <div>
           <Button
-            buttonText={'Already Registered'}
+            buttonText={alreadyRegisteredBtnText}
             onClick={this._enableEditInfo}
           />
           <LinkButton
-            buttonText={'New Registration'}
+            buttonText={newRegistrationBtnText}
             linkPath={'/studentRegister'}
           />
         </div>

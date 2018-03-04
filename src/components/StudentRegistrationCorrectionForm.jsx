@@ -10,6 +10,11 @@ import {
   busStops,
   gender,
   yesOrNo,
+  goBackBtnText,
+  formSubmitBtnText,
+  invalidIdMessage,
+  noInfoChangeMessage,
+  infoUpdateSuccessMessage,
 } from '../utils/yjsgConstants';
 import InputField from './formComponents/InputField';
 import TextAreaField from './formComponents/TextAreaField';
@@ -149,9 +154,9 @@ class StudentRegistrationCorrectionForm extends Component {
       return (
         <div className={"popup"}>
           <div className={"popupContainer"}>
-            <h5>{'आपकी जानकारी सफलता पूर्वक अपडेट कर दी गई है |'}</h5>
+            <h5>{infoUpdateSuccessMessage}</h5>
             <LinkButton
-              buttonText={'वापस जाओ'}
+              buttonText={goBackBtnText}
               linkPath={'/splashPrePopulated'}
             />
           </div>
@@ -162,9 +167,9 @@ class StudentRegistrationCorrectionForm extends Component {
       return (
         <div className={"popup"}>
           <div className={"popupContainer"}>
-            <h5>{'जानकारी में कोई बदलाव नहीं '}</h5>
+            <h5>{noInfoChangeMessage}</h5>
             <LinkButton
-              buttonText={'वापस जाओ'}
+              buttonText={goBackBtnText}
               linkPath={'/splashPrePopulated'}
             />
           </div>
@@ -334,11 +339,11 @@ class StudentRegistrationCorrectionForm extends Component {
             />
             <div className={'registrationFormButtonContainer'}>
               <Button
-                buttonText={'Submit'}
+                buttonText={formSubmitBtnText}
                 onClick={this._submitStudentData}
               />
               <LinkButton
-                buttonText={'Go Back'}
+                buttonText={goBackBtnText}
                 linkPath={'/splashPrePopulated'}
               />
             </div>
@@ -359,10 +364,9 @@ class StudentRegistrationCorrectionForm extends Component {
         <div className={'errorPopupContainer'}>
           <div className={"popup"}>
             <div className={"popupContainer"}>
-              <h5>{'आपके द्वारा दर्ज किया गया आई.डी. नं. अथवा सीक्रेट कोड गलत है ।\n' +
-              'कृपया पुनः प्रयास करे ।'}</h5>
+              <h5>{invalidIdMessage}</h5>
               <LinkButton
-                buttonText={'Go Back'}
+                buttonText={goBackBtnText}
                 linkPath={'/splashPrePopulated'}
               />
             </div>
