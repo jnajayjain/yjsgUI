@@ -26,68 +26,68 @@ export const studiesArray = [
 ];
 
 export const busStops =  [
-  {text: 'गाँधी नगर मंदिर',
+{text: 'गाँधी नगर मंदिर',
     value: 'Gandhi Nagar Mandir'
   },
   {text: 'कालानी मंदिर गली मेन रोड',
-    value: 'Kaalani Mandir Gali Main Road'
+    value: 'Kalani Mandir Gali Main Road'
   },
   {text: 'कालानी नगर मंदिर गली मेन रोड - 2',
     value: 'Kaalani Nagar Mandir Gali Main Road - 2'
   },
   {text: 'साधना नगर मंदिर गली मेन रोड',
-    value: 'Saadhna Nagar Mandir Gali Main Road'
+    value: 'Sadhna Nagar Mandir Gali Main Road'
   },
   {text: 'अंजनी नगर (60 फुट रोड)',
-    value: 'Anjani Nagar(60 Foot Road)'
+    value: 'Anjani Nagar (60 Ft Road)'
   },
   {text: 'स्मृति नगर मंदिर गली (बांगड़दा रोड)',
-    value: 'Smrti Nagar Mandir Gali(Baangarda Road)'
+    value: 'Smarati Nagar Mandir Gali Bangarda Road'
   },
   {text: 'पल्हर नगर बांगड़दा रोड (पानी की टंकी)',
-    value: 'Palhar Nagar Baangarda Road(Paani ki tanki)'
+    value: 'Palhar Nagar Bangada Road (Pani Ki Tanki)'
   },
   {text: 'इंदौर तार फैक्टरी (संगम नगर)',
-    value: 'Indore Taar Factory(Sangam Nagar)'
+    value: 'Indore Wire Factory (Sangam Nagar)'
   },
   {text: 'रामचंद नगर सर्किल (एरोड्रम रोड)',
-    value: 'Raamchand Nagar Circle (Aerodrom Road)'
+    value: 'Ramchand Nagar Circle (Areodrum Rd)'
   },
   {text: 'छात्रपति नगर मेन रोड (महावीर बाग)',
-    value: 'Chhatrapati Nagar Main Road(Mahaveer Bagh)'
+    value: 'Chatrapati Nagar Main Road (Mahavir Bag)'
   },
   {text: 'बड़ा गणपति',
     value: 'Bada Ganpati'
   },
   {text: 'राजमोहल्ला (OPP चैत्यालय)',
-    value: 'RajMohalla(Opp Chaityalaya)'
+    value: 'Raj Mohalla Opp. Chetyalaya'
   },
   {text: 'रामशाह मंदिर मेन रोड',
-    value: 'Ramshah Mandir Main Road'
+    value: 'Ramashah Mandir Main Road'
   },
   {text: 'कांच मंदिर मेन रोड (नरसिंह बाजार)',
-    value: 'Kaanch Mandir Main Road(Narsingh Bazar)'
+    value: 'Kanch Mandir Main Road (Narsign Bajar)'
   },
   {text: 'रामबाग चौराहा (कुसुम टाकीज़)',
-    value: 'Rambagh Square(Kusum Talkies)'
+    value: 'Ram Bag Choraha Kusum Takiz Road'
   },
   {text: 'चिकमंगलूर चौराहा',
-    value: 'Chikmanglur Square'
+    value: 'Chikmanglur Chauraha'
   },
   {text: 'जीएसआईटीएस सर्किल',
-    value: 'GSITS circle'
+    value: 'GSITS Circle'
   },
   {text: 'क्लर्क कॉलोनी  ITI मेन रोड',
     value: 'Clerk Colony ITI Main Road'
   },
   {text: 'बजरंग/नंदा नगर मेन रोड (मंदिर)',
-    value: 'Bajrang/Nanda Nagar Main Road(Mandir)'
+    value: 'Bajrang/Nanda Nagar Main Road (Mandir)'
   },
   {text: 'सुखलिया MR10 मंदिर गली',
-    value: 'Sukhliya MR10 Mandir gali'
+    value: 'Sukhaliya MR10 Mandir Gali'
   },
   {text: 'विजय नगर-कृष्णा मिल्क सेंटर',
-    value: 'Vijay Nagar - Krishna Milk centre'
+    value: 'Vijay Nagar - Krishna Milk Centre'
   },
   {text: '78 Scheme (मंदिर)',
     value: '78 Scheme (Mandir)'
@@ -99,10 +99,10 @@ export const busStops =  [
     value: 'Tulsi Nagar Main Road(Mahalaxmi Mandir)'
   },
   {text: 'जावरवाला मंदिर',
-    value: 'Jaavarwala Mandir'
+    value: 'Jawrawala Mandir'  
   },
   {text: 'समवशरण मंदिर',
-    value: 'Samwasharan Mandir'
+    value: 'Samavsharan Mandir'
   },
   {text: 'गीता भवन',
     value: 'Geeta Bhawan'
@@ -119,14 +119,14 @@ export const busStops =  [
   {text: 'गोयल नगर मंदिर',
     value: 'Goyal Nagar Mandir'
   },
-  {text: 'गोयल नगर बंगाली चौराहा',
-    value: 'Goyal Nagar Bengali Square'
+  {text: 'बंगाली चौराहा (वाइन शॉप)',
+    value: 'Bangali Choraha (Wine Shop)'
   },
   {text: 'सुख शांति/उदय नगर मंदिर',
     value: 'Sukh Shanti/Uday Nagar Mandir'
   },
   {text: 'वैभव नगर (शर्मा  स्वीट्स)',
-    value: 'Vaibhav Nagar(Sharma Sweets)'
+    value: 'Vaibhav Nagar (Sharma Sweets)'
   },
   {text: 'ब्रजेशवरी मंदिर IDA 140 JMB',
     value: 'Brajeshwari Mandir IDA 140 JMB'
@@ -141,25 +141,25 @@ export const busStops =  [
     value: 'Sapna Sangeeta Tower Circle'
   },
   {text: 'जैन कोलोनी (अहिंसा  गेट)',
-    value: 'Jain Colony(Ahinsa Gate)'
+    value: 'Jain Colony Ahinsa Gate'
   },
   {text: 'रंजीत हनुमान (गुमाश्ता नगर)',
-    value: 'Ranjeet Hanuman(Gumashta Nagar)'
+    value: 'Ranjit Hanuman (Gumashta Nagar)'
   },
   {text: 'महावीर गेट (सुदामा नगर )',
     value: 'Mahavir Gate(Sudama Nagar)'
   },
   {text: 'परिवहन नगर (नितिन ट्रेडर्स गली)',
-    value: 'Parivahan Nagar(Nitin Traders Gali)'
+    value: 'Parivahan Nagar (Nitin Traders Gali)'
   },
   {text: 'वैशाली  नगर गोपुर चौराहा',
-    value: 'Vaishali Nagar Gopur Square'
+    value: 'Vaishali Nagar Gopur Choraha'
   },
   {text: 'चोइथराम सर्किल ',
     value: 'Choithram Circle'
   },
   {text: 'राजेंद्र नगर D-MART चौराहा',
-    value: 'Rajendra Nagar D-MART Square'
+    value: 'Rajendra Nagar D-Mart Choraha'
   }
 ];
 
@@ -169,7 +169,7 @@ export const gender = [
     value: 'M'
   },
   {
-    text: 'महिला',
+    text: 'स्त्री',
     value: 'F'
   }
 ];
@@ -185,7 +185,7 @@ export const yesOrNo = [
   }
 ];
 
-export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय) वर्ष';
+export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय वर्ष)';
 
 export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र';
 
@@ -193,7 +193,7 @@ export const yjsgFooterContactInfo = '74470-56789';
 
 export const eventDate = 'दिनांक: २९ अप्रैल २०१८, रविवार  से ७ मई २०१८, सोमवार तक';
 
-export const eventVenue = 'स्थान: सन्मति स्कूल, (चिड़ियाघर के पास), इन्दौर';
+export const eventVenue = 'स्थान: सन्मति स्कूल, इन्दौर';
 
 export const goBackBtnText = 'Go Back';
 
