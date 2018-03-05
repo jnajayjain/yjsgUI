@@ -50,7 +50,7 @@ class StudentRegistrationForm extends Component {
         address: '',
         busStop: '',
         course2018: '',
-        optIn2018: ''
+        optIn2018: 1,
       },
       isSubmitTriggered: false,
       errorMessage: {
@@ -81,7 +81,7 @@ class StudentRegistrationForm extends Component {
   }
 
   componentDidMount() {
-    this.checkError({email: '', motherMobile: ''});
+    this.checkError({email: '', motherMobile: '', optIn2018: 1});
   }
 
   isValidData() {
@@ -152,15 +152,6 @@ class StudentRegistrationForm extends Component {
         {this.renderSuccessMessage()}
         <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
         <div className={'inputFieldContainer'}>
-          <SelectListInputField
-            name={'optIn2018'}
-            label={'2018 के शिविर की स्वीकृति ?'}
-            options={yesOrNo}
-            onInputChange={this._handleInputChange}
-            value={this.state.student.optIn2018}
-            isRequired={true}
-            errorMessage={this.state.errorMessage.optIn2018['message']}
-          />
           <InputField
             type={'text'}
             label={'नाम'}
