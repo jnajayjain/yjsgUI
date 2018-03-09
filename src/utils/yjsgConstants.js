@@ -160,6 +160,12 @@ export const busStops =  [
   },
   {text: 'राजेंद्र नगर D-MART चौराहा',
     value: 'Rajendra Nagar D-Mart Choraha'
+  },
+  {text: 'अन्य बस स्टॉप',
+	    value: 'Other Bus Stop'
+  },
+  {text: 'निजी वाहन से ',
+	    value: 'Self Vehicle'
   }
 ];
 
