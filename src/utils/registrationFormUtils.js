@@ -71,7 +71,7 @@ export const optionalEmailValidate = (value, name) => {
  */
 export const nameValidate = (value, name) => {
   let errorMessageObject = {};
-  const nameRegExp = /^[a-zA-Z\s]+$/;
+  const nameRegExp = /^[a-zA-Z\s\.]+$/;
 
   if(isEmpty(value)) {
     errorMessageObject['message'] = 'यह जानकारी अनिवार्य है';
