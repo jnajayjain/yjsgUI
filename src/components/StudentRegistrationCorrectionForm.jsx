@@ -120,26 +120,37 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   submitStudentData() {
-    this.checkError(this.state.student);
-    if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
+    if (String(this.state.student.optIn2018) === '0') {
       this.setState({
         isSubmitTriggered: true,
       });
       this.updateStudentData();
     } else {
-      this.setState({
-        isFormChanged: false,
-        isSubmitTriggered: true,
-      });
+      this.checkError(this.state.student);
+
+      if(!isEqual(this.props.studentData, this.state.student) && this.isValidData()) {
+        this.setState({
+          isSubmitTriggered: true,
+        });
+        this.updateStudentData();
+      } else {
+        this.setState({
+          isFormChanged: false,
+          isSubmitTriggered: true,
+        });
+      }
     }
   }
 
   handleInputChange(value, name) {
-    let errorMessageObject = {} ;
-     errorMessageObject[name]= validateInput(value, name);
-    let updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
     let updatedData = extend(cloneDeep(this.state.student),
       setRegistrationData(value, name));
+    let errorMessageObject = {} ;
+
+    errorMessageObject[name]= validateInput(value, name);
+
+    let updatedErrorState = extend(cloneDeep(this.state.errorMessage), errorMessageObject);
+
     this.setState({
       student: updatedData,
       errorMessage: updatedErrorState,
@@ -205,7 +216,146 @@ class StudentRegistrationCorrectionForm extends Component {
     }
   }
 
+  renderNoValidationFields() {
+    return (
+      <div className={'registrationFormContainer'}>
+        {this.renderSuccessMessage()}
+        <h3 className={'registrationFormHeading'}>{yjsgHeader}</h3>
+        <div className={'inputFieldContainer'}>
+          <SelectListInputField
+            name={'optIn2018'}
+            label={'2018 के शिविर की स्वीकृति ?'}
+            options={yesOrNo}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.optIn2018}
+            isRequired={true}
+          />
+          <InputField
+            type={'number'}
+            label={'आई.डी.'}
+            name={'id'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.id}
+            isRequired={true}
+            disabled={true}
+          />
+          <InputField
+            type={'text'}
+            label={'नाम'}
+            name={'name'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.name}
+            isRequired={true}
+          />
+          <InputField
+            type={'text'}
+            label={'पिता / पति का नाम'}
+            name={'fatherName'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.fatherName}
+            isRequired={true}
+          />
+          <SelectListInputField
+            name={'gender'}
+            label={'लिंग'}
+            options={gender}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.gender}
+            isRequired={true}
+          />
+          <InputField
+            type={'number'}
+            label={'उम्र'}
+            name={'age'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.age}
+            isRequired={true}
+          />
+          <InputField
+            type={'number'}
+            label={'मोबाइल नं.'}
+            name={'mobile'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.mobile}
+            isRequired={true}
+          />
+          <InputField
+            type={'number'}
+            label={'मोबाइल नं. ( माता का )'}
+            name={'motherMobile'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.motherMobile}
+            isRequired={false}
+          />
+          <InputField
+            type={'text'}
+            label={'व्यवसाय (युवा वर्ग हेतु)'}
+            name={'occupation'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.occupation}
+            isRequired={false}
+          />
+          <InputField
+            type={'text'}
+            label={'स्कूल शिक्षा'}
+            name={'education'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.education}
+            isRequired={false}
+          />
+          <InputField
+            type={'email'}
+            label={'ई-मेल'}
+            name={'email'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.email}
+            isRequired={false}
+          />
+          <TextAreaField
+            label={'पूरा पता'}
+            name={'address'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.address}
+            isRequired={true}
+          />
+          <SelectListInputField
+            type={'text'}
+            label={'बस स्टॉप (कृपया निकटतम बस स्टॉप चुनें)'}
+            name={'busStop'}
+            options={busStops}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.busStop}
+            isRequired={true}
+          />
+          {this.renderClassAttended2017()}
+          <SelectListInputField
+            name={'course2018'}
+            label={'आप क्या अध्ययन करना चाहते हैं ?'}
+            options={studiesArray}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.course2018}
+            isRequired={true}
+          />
+          <div className={'registrationFormButtonContainer'}>
+            <Button
+              buttonText={formSubmitBtnText}
+              onClick={this._submitStudentData}
+            />
+            <LinkButton
+              buttonText={goBackBtnText}
+              linkPath={'/splashPrePopulated'}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
   render() {
+    if (String(this.state.student.optIn2018) === '0') {
+      return this.renderNoValidationFields();
+    }
     if (this.props.studentData && this.props.isFetched) {
       return (
         <div className={'registrationFormContainer'}>
