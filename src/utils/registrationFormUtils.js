@@ -71,7 +71,7 @@ export const optionalEmailValidate = (value, name) => {
  */
 export const nameValidate = (value, name) => {
   let errorMessageObject = {};
-  const nameRegExp = /^[a-zA-Z\s]+$/;
+  const nameRegExp = /^[a-zA-Z\s\.]+$/;
 
   if(isEmpty(value)) {
     errorMessageObject['message'] = 'यह जानकारी अनिवार्य है';
@@ -122,7 +122,7 @@ export const ageValidate = (value, name) => {
   if(isEmpty(value)) {
     errorMessageObject['message'] = 'यह जानकारी अनिवार्य है';
     errorMessageObject[`isValid_${name}`] = false;
-  } else if (value > 46 || value < 8) {
+  } else if (value > 45 || value < 8) {
     errorMessageObject['message'] = 'केवल ८ - ४५ वर्ष तक ही मान्य';
     errorMessageObject[`isValid_${name}`] = false;
   } else {
