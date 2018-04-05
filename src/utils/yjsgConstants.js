@@ -191,6 +191,29 @@ export const yesOrNo = [
   }
 ];
 
+export const optIn2018Options = [
+  {
+    text: 'हाँ',
+    value: 1
+  },
+  {
+    text: 'नहीं',
+    value: 0
+  },
+  {
+    text: 'पक्का  नहीं',
+    value: 2
+  },
+  {
+    text: 'गलत फ़ोन नंबर',
+    value: 3
+  },
+  {
+    text: 'फ़ोन  नहीं  उठाया',
+    value: 4
+  }
+];
+
 export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय वर्ष)';
 
 export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र';

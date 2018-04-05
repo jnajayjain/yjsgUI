@@ -9,7 +9,7 @@ import {
   studiesArray,
   busStops,
   gender,
-  yesOrNo,
+  optIn2018Options,
   goBackBtnText,
   formSubmitBtnText,
   invalidIdMessage,
@@ -120,7 +120,7 @@ class StudentRegistrationCorrectionForm extends Component {
   }
 
   submitStudentData() {
-    if (String(this.state.student.optIn2018) === '0') {
+    if (String(this.state.student.optIn2018) !== '1') {
       this.setState({
         isSubmitTriggered: true,
       });
@@ -225,7 +225,7 @@ class StudentRegistrationCorrectionForm extends Component {
           <SelectListInputField
             name={'optIn2018'}
             label={'2018 के शिविर की स्वीकृति ?'}
-            options={yesOrNo}
+            options={optIn2018Options}
             onInputChange={this._handleInputChange}
             value={this.state.student.optIn2018}
             isRequired={true}
@@ -353,7 +353,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
 
   render() {
-    if (String(this.state.student.optIn2018) === '0') {
+    if (String(this.state.student.optIn2018) !== '1') {
       return this.renderNoValidationFields();
     }
     if (this.props.studentData && this.props.isFetched) {
@@ -365,7 +365,7 @@ class StudentRegistrationCorrectionForm extends Component {
             <SelectListInputField
               name={'optIn2018'}
               label={'2018 के शिविर की स्वीकृति ?'}
-              options={yesOrNo}
+              options={optIn2018Options}
               onInputChange={this._handleInputChange}
               value={this.state.student.optIn2018}
               isRequired={true}
