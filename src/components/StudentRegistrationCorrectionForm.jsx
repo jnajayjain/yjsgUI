@@ -54,7 +54,8 @@ class StudentRegistrationCorrectionForm extends Component {
         address: '',
         busStop: '',
         course2018: '',
-        optIn2018: ''
+        optIn2018: '',
+        remark: '',
       },
       isSubmitTriggered: false,
       isValidId: false,
@@ -336,6 +337,13 @@ class StudentRegistrationCorrectionForm extends Component {
             value={this.state.student.course2018}
             isRequired={true}
           />
+          <TextAreaField
+            label={'Remark'}
+            name={'remark'}
+            onInputChange={this._handleInputChange}
+            value={this.state.student.remark}
+            isRequired={false}
+          />
           <div className={'registrationFormButtonContainer'}>
             <Button
               buttonText={formSubmitBtnText}
@@ -486,6 +494,13 @@ class StudentRegistrationCorrectionForm extends Component {
               value={this.state.student.course2018}
               isRequired={true}
               errorMessage={this.state.errorMessage.course2018['message']}
+            />
+            <TextAreaField
+              label={'Remark'}
+              name={'remark'}
+              onInputChange={this._handleInputChange}
+              value={this.state.student.remark}
+              isRequired={false}
             />
             <div className={'registrationFormButtonContainer'}>
               <Button
