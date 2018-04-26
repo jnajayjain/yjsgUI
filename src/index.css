@@ -350,6 +350,28 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.adminSearchContent{
+  width: 700px;
+  margin: 0 auto;
+}
+.adminSearchContainer {
+  margin-bottom: 40px;
+}
+.adminPanelContainer .adminPanelContent .adminResultsContainer {
+  height: 100%;
+}
+.adminResultsContent {
+  max-height: 700px;
+  overflow: auto;
+}
+.logoutButtonContainer{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.logoutButtonContainer .buttonContainer {
+  margin-top: 5px;
+}
 
 @media (max-width:1280px) {
   .inputFieldContainer{
@@ -363,10 +385,28 @@ input[type=number]::-webkit-outer-spin-button {
   .inputWrapper{
     width: 50%;
   }
+  .adminSearchContent .inputWrapper {
+    width: 33%;
+  }
 }
 @media (max-width:480px) {
+  .adminSearchContent,
+  .adminSearchContent .inputWrapper{
+    width: 100%;
+  }
+  .logoutButtonContainer {
+    top: 60px;
+    right: 10px;
+  }
+  .logoutButtonContainer .linkButton {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
   .inputWrapper{
     width: 100%;
+  }
+  .adminResultsContent {
+    max-height: 500px;
   }
   .buttonContainer {
     margin: 10px 0 0;
@@ -442,11 +482,11 @@ input[type=number]::-webkit-outer-spin-button {
   align-items: center;
   justify-content: space-around;
 }
-
+/*
 .adminResultsContent {
   overflow: auto;
   height: 400px;
-}
+}*/
 
 .logoutButtonContainer {
   float: right;
