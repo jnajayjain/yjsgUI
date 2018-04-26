@@ -102,7 +102,7 @@ class StudentRegistrationCorrectionForm extends Component {
     if (nextProps.studentData) {
       this.prePopulateCourse2018(nextProps);
       this.setState({
-        student: nextProps.studentData,
+        student: {...this.state.student, ...nextProps.studentData},
         isValidId: true,
         isSubmitTriggered: false,
       });
@@ -361,7 +361,7 @@ class StudentRegistrationCorrectionForm extends Component {
 
 
   render() {
-    if (String(this.state.student.optIn2018) !== '1') {
+    if (this.props.isFetched && String(this.state.student.optIn2018) !== '1') {
       return this.renderNoValidationFields();
     }
     if (this.props.studentData && this.props.isFetched) {

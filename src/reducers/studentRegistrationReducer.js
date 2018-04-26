@@ -60,7 +60,7 @@ const studentRegistrationReducer = (state = initialState, action) => {
     case 'FETCH_STUDENT_SUCCESS_ACTION':
       return {
         ...state,
-        student: {...state.student, ...action.student},
+        student: {...action.student},
         isLoading: false,
         isFetched: true,
       };
