@@ -1,9 +1,19 @@
 import { takeLatest, put } from 'redux-saga/effects';
 
-import { createStudent, fetchStudent, updateStudent } from './studentRegisterAPI';
+import {
+  createStudent,
+  fetchStudent,
+  searchStudent,
+  updateStudent,
+} from './studentRegisterAPI';
 import {
   createStudentFailedAction,
-  createStudentSuccessAction, fetchStudentFailedAction, fetchStudentSuccessAction,
+  createStudentSuccessAction,
+  fetchSearchResultsFailureAction,
+  fetchSearchResultsSuccessAction,
+  fetchStudentFailedAction,
+  fetchStudentSuccessAction,
+  setNoRecordsFoundMessageAction,
   updateStudentFailedAction,
   updateStudentSuccessAction
 } from '../actions/studentRegistrationActions';
@@ -13,6 +23,7 @@ export default function* rootSaga () {
   yield takeLatest(['CREATE_STUDENT'], createStudentSaga);
   yield takeLatest(['FETCH_STUDENT'], fetchStudentSaga);
   yield takeLatest(['UPDATE_STUDENT'], updateStudentSaga);
+  yield takeLatest(['FETCH_SEARCH_RESULTS'], searchStudentSaga);
 }
 
 export function* createStudentSaga(action) {
@@ -59,6 +70,22 @@ export function* updateStudentSaga(action) {
     }
   } catch (e) {
     yield put(updateStudentFailedAction(errorMessage));
+    throw e;
+  }
+}
+
+export function* searchStudentSaga(action) {
+  const { searchKey, searchValue, adminKey } = action;
+  const errorMessage = 'Error fetching student details.';
+  try {
+    const response = yield searchStudent(adminKey, searchKey, searchValue);
+    if (response.students) {
+      yield put(fetchSearchResultsSuccessAction(response.students));
+    } else {
+      yield put(setNoRecordsFoundMessageAction(response.message));
+    }
+  } catch (e) {
+    yield put(fetchSearchResultsFailureAction(errorMessage));
     throw e;
   }
 }

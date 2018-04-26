@@ -214,6 +214,21 @@ export const optIn2018Options = [
   }
 ];
 
+export const adminSearchOptions = [
+  {
+    text: 'id',
+    value: 'id'
+  },
+  {
+    text: 'name',
+    value: 'name'
+  },
+  {
+    text: 'mobile',
+    value: 'mobile'
+  },
+];
+
 export const yjsgHeader = 'जैन बाल एवं युवा संस्कार शिक्षण शिविर (तृतीय वर्ष)';
 
 export const yjsgFooterText = 'किसी भी अन्य जानकारी प्राप्त करने हेतु संपर्क सूत्र';
@@ -239,4 +254,14 @@ export const invalidIdMessage = 'आपके द्वारा दर्ज �
 export const noInfoChangeMessage = 'जानकारी में कोई बदलाव नहीं ';
 
 export const infoUpdateSuccessMessage = 'आपकी जानकारी सफलता पूर्वक अपडेट कर दी गई है |';
+
+export const adminLoginBtnText = 'Admin Login';
+
+export const loginBtnText = 'Login';
+
+export const adminId = 'yjsgadmin';
+
+export const adminPassword = '451725';
+
+export const invalidAdminMsg = 'Invalid ID or Password';
 

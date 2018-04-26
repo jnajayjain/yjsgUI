@@ -8,7 +8,6 @@ import {
   studiesArray,
   busStops,
   gender,
-  yesOrNo,
   goBackBtnText,
   formSubmitBtnText,
 } from '../utils/yjsgConstants';

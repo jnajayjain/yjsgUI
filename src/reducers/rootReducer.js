@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux';
 
-import studentRegistrationReducer from './studentRegistrationReducer';
+import {
+  studentRegistrationReducer,
+  studentSearchReducer,
+} from './studentRegistrationReducer';
 
 const rootReducer = combineReducers({
   studentRegistrationReducer,
+  studentSearchReducer,
 });
 
 export default rootReducer;
