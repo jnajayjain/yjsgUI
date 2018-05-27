@@ -20,3 +20,8 @@ export const fetchStudent = (id, secretKey) =>
   GET({
     url: `/v1/students/${id}/${secretKey}`,
   });
+
+export const searchStudent = (adminKey, searchKey, searchValue) =>
+  GET({
+    url: `/v1/students/${adminKey}/?${searchKey}=${searchValue}`,
+  });

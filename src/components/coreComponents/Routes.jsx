@@ -6,6 +6,7 @@ import StudentRegistrationForm from '../StudentRegistrationForm';
 import StudentRegistrationCorrectionForm from '../StudentRegistrationCorrectionForm';
 import Footer from './Footer';
 import SplashPagePrePopulated from '../SplashPagePrePopulated';
+import AdminPanel from '../AdminPanel';
 
 const Routes = () => (
   <div>
@@ -13,6 +14,7 @@ const Routes = () => (
     <Route exact path={'/splashPrePopulated'} component={SplashPagePrePopulated} />
     <Route exact path={'/studentRegister'} component={StudentRegistrationForm}  />
     <Route exact path={'/studentCorrection'} component={StudentRegistrationCorrectionForm} />
+    <Route exact path={'/adminPanel'} component={AdminPanel} />
     <Footer />
   </div>
 );

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import LinkButton from './commonComponents/LinkButton';
 import Button from './commonComponents/Button';
 import InputField from './formComponents/InputField';
-import { fetchStudentData, setStudentCredentials } from '../actions/studentRegistrationActions';
+import { fetchStudentData, setAdminCredentials, setStudentCredentials } from '../actions/studentRegistrationActions';
 import yjsgLogo from '../assets/yjsgLogo.png';
 import {
   yjsgHeader,
@@ -17,6 +17,8 @@ import {
   alreadyRegisteredBtnText,
   newRegistrationBtnText,
   viewEditInfoBtnText,
+  loginBtnText,
+  adminLoginBtnText,
 } from '../utils/yjsgConstants';
 import { setRegistrationData } from '../utils/registrationFormUtils';
 import { getUserId, getUserSecretKey } from '../reducers/studentRegistrationReducer';
@@ -26,15 +28,20 @@ class SplashPage extends Component {
     super(props);
 
     this.state = {
-      isCorrection: true,
+      isCorrection: false,
+      isAdmin: false,
       credentials: {},
+      admin: {},
       isURLParams: false
     };
 
     this._enableEditInfo = this.enableEditInfo.bind(this);
     this._disableEditInfo = this.disableEditInfo.bind(this);
+    this._enableAdminLogin = this.enableAdminLogin.bind(this);
+    this._disableAdminLogin = this.disableAdminLogin.bind(this);
     this._handleInputChange = this.handleInputChange.bind(this);
     this._fetchStudentById = this.fetchStudentById.bind(this);
+    this._setAdminLogin = this.setAdminLogin.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,10 +68,26 @@ class SplashPage extends Component {
     })
   }
 
+  enableAdminLogin() {
+    this.setState({
+      isAdmin: true,
+    });
+  }
+
+  disableAdminLogin() {
+    this.setState({
+      isAdmin: false,
+    })
+  }
+
   disableEditInfo() {
     this.setState({
       isCorrection: false,
     })
+  }
+
+  setAdminLogin() {
+    this.props.setAdminCredentials(this.state.admin.adminId, this.state.admin.adminPassword);
   }
 
   fetchStudentById () {
@@ -77,43 +100,87 @@ class SplashPage extends Component {
   handleInputChange(value, name) {
     let updatedData = extend(cloneDeep(this.state.credentials),
       setRegistrationData(value, name));
+
+    let adminData = extend(cloneDeep(this.state.admin),
+      setRegistrationData(value, name));
+
     this.setState({
       credentials: updatedData,
+      admin: adminData,
     });
   }
 
-  renderCorrectionIdField() {
+  renderRegistrationCorrectionFields() {
+    return (
+      <div>
+        <InputField
+          type={'number'}
+          name={'studentId'}
+          label={'आई.डी. नं.'}
+          placeholder={'अपना आई.डी. नं. दर्ज करें'}
+          onInputChange={this._handleInputChange}
+          value={this.state.credentials.studentId}
+        />
+        <InputField
+          type={'text'}
+          name={'secretKey'}
+          label={'सीक्रेट कोड'}
+          placeholder={'अपना सीक्रेट कोड दर्ज करें'}
+          onInputChange={this._handleInputChange}
+          value={this.state.credentials.secretKey}
+        />
+        <LinkButton
+          buttonText={viewEditInfoBtnText}
+          linkPath={'/studentCorrection'}
+          onClick={this._fetchStudentById}
+        />
+        <Button
+          buttonText={goBackBtnText}
+          onClick={this._disableEditInfo}
+        />
+      </div>
+    )
+  }
+
+  renderAdminLoginFields() {
+    return (
+      <div>
+        <InputField
+          type={'text'}
+          name={'adminId'}
+          label={'Admin ID'}
+          placeholder={'Enter Admin ID'}
+          onInputChange={this._handleInputChange}
+          value={this.state.admin.adminId}
+        />
+        <InputField
+          type={'password'}
+          name={'adminPassword'}
+          label={'Admin Password'}
+          placeholder={'Enter Admin Password'}
+          onInputChange={this._handleInputChange}
+          value={this.state.admin.adminPassword}
+        />
+        <LinkButton
+          buttonText={loginBtnText}
+          linkPath={'/adminPanel'}
+          onClick={this._setAdminLogin}
+        />
+        <Button
+          buttonText={goBackBtnText}
+          onClick={this._disableAdminLogin}
+        />
+      </div>
+    );
+  }
+
+  renderLoginField() {
     if (this.state.isCorrection) {
-      return (
-        <div>
-          <InputField
-            type={'number'}
-            name={'studentId'}
-            label={'आई.डी. नं.'}
-            placeholder={'अपना आई.डी. नं. दर्ज करें'}
-            onInputChange={this._handleInputChange}
-            value={this.state.credentials.studentId}
-          />
-          <InputField
-            type={'text'}
-            name={'secretKey'}
-            label={'सीक्रेट कोड'}
-            placeholder={'अपना सीक्रेट कोड दर्ज करें'}
-            onInputChange={this._handleInputChange}
-            value={this.state.credentials.secretKey}
-          />
-          <LinkButton
-            buttonText={viewEditInfoBtnText}
-            linkPath={'/studentCorrection'}
-            onClick={this._fetchStudentById}
-          />
-          <Button
-            buttonText={goBackBtnText}
-            onClick={this._disableEditInfo}
-          />
-        </div>
-      )
-    } else {
+      return this.renderRegistrationCorrectionFields();
+    } else if (this.state.isAdmin) {
+      return this.renderAdminLoginFields();
+    }
+    else {
       return (
         <div>
           <Button
@@ -123,6 +190,10 @@ class SplashPage extends Component {
           <LinkButton
             buttonText={newRegistrationBtnText}
             linkPath={'/studentRegister'}
+          />
+          <Button
+            buttonText={adminLoginBtnText}
+            onClick={this._enableAdminLogin}
           />
         </div>
       )
@@ -142,10 +213,11 @@ class SplashPage extends Component {
             <img src={yjsgLogo} alt={'yjsg logo'} />
           </div>
           <div className={'landingPageButtonContainer'}>
-            {this.renderCorrectionIdField()}
+            {this.renderLoginField()}
           </div>
         </div>
-      </div>)
+      </div>
+    );
   }
 }
 
@@ -166,5 +238,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchStudentData,
-  setStudentCredentials
+  setStudentCredentials,
+  setAdminCredentials,
 })(SplashPage);

@@ -57,3 +57,35 @@ export const updateStudentFailedAction = message => ({
   type: 'UPDATE_STUDENT_FAILED_ACTION',
   message,
 });
+
+export const setAdminCredentials = (id, password) => ({
+  type: 'SET_ADMIN_CREDENTIALS',
+  id,
+  password
+});
+
+export const fetchSearchResultsAction = (adminKey, searchKey, searchValue) => ({
+  type: 'FETCH_SEARCH_RESULTS',
+  adminKey,
+  searchKey,
+  searchValue,
+});
+
+export const fetchSearchResultsSuccessAction = searchResults => ({
+  type: 'FETCH_SEARCH_RESULTS_SUCCESS',
+  searchResults,
+});
+
+export const fetchSearchResultsFailureAction = errorMessage => ({
+  type: 'FETCH_SEARCH_RESULTS_FAILURE',
+  errorMessage,
+});
+
+export const clearSearchResultsAction = () => ({
+  type: 'CLEAR_SEARCH_RESULTS',
+});
+
+export const setNoRecordsFoundMessageAction = message => ({
+  type: 'SET_NO_RECORDS_FOUND_MESSAGE',
+  message,
+});

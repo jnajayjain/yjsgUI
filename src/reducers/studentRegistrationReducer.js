@@ -6,11 +6,13 @@ const initialState = {
   isCreated: false,
   id: '',
   secretKey: '',
+  adminId: '',
+  adminPassword: '',
   updateMessage: '',
   updatedStudent: {}
 };
 
-const studentRegistrationReducer = (state = initialState, action) => {
+export const studentRegistrationReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case 'CREATE_STUDENT':
@@ -86,6 +88,27 @@ const studentRegistrationReducer = (state = initialState, action) => {
         isFetched: false,
       };
 
+    case 'SET_ADMIN_CREDENTIALS':
+      return {
+        ...state,
+        adminId: action.id,
+        adminPassword: action.password,
+      };
+
+    case 'FETCH_SEARCH_RESULTS':
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case 'FETCH_SEARCH_RESULTS_FAILURE':
+    case 'FETCH_SEARCH_RESULTS_SUCCESS':
+    case 'SET_NO_RECORDS_FOUND_MESSAGE':
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     default: {
       return {
         ...state,
@@ -94,7 +117,35 @@ const studentRegistrationReducer = (state = initialState, action) => {
   }
 };
 
-export default studentRegistrationReducer;
+export const studentSearchReducer = (state = {}, action) => {
+  switch (action.type) {
+
+    case 'FETCH_SEARCH_RESULTS_SUCCESS':
+      return {
+        ...state,
+        searchResults: { students: action.searchResults },
+      };
+
+    case 'SET_NO_RECORDS_FOUND_MESSAGE':
+      return {
+        ...state,
+        searchResults: { message: action.message },
+      };
+
+    case 'CLEAR_SEARCH_RESULTS':
+      return {
+        ...state,
+        searchResults: { students: [] },
+      };
+
+    default: {
+      return {
+        ...state,
+      }
+    }
+  }
+};
+
 
 export const getStudent = state => state.studentRegistrationReducer.student;
 
@@ -113,3 +164,9 @@ export const updateMessage = state => state.studentRegistrationReducer.student.m
 export const getUserId = state => state.studentRegistrationReducer.id;
 
 export const getUserSecretKey = state => state.studentRegistrationReducer.secretKey;
+
+export const getAdminId = state => state.studentRegistrationReducer.adminId;
+
+export const getAdminPassword = state => state.studentRegistrationReducer.adminPassword;
+
+export const getSearchResults = state => state.studentSearchReducer.searchResults;
